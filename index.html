@@ -26,14 +26,17 @@
     />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    <!-- Custom-->
+    <link rel="stylesheet" href="css/intro.css" />
+    <script src="js/intro.js"></script>
   </head>
   <body>
     <header>
       <h1 class="site-heading text-center text-faded d-none d-lg-block">
         <span class="site-heading-upper text-primary mb-3">
-          동사모
+          For My Pet
         </span>
-        <span class="site-heading-lower">차후 정함</span>
+        <span class="site-heading-lower">F.M.P.</span>
       </h1>
     </header>
     <!-- Navigation-->
@@ -43,7 +46,7 @@
           class="navbar-brand text-uppercase fw-bold d-lg-none"
           href="index.html"
         >
-          Start Bootstrap
+          F.M.P.
         </a>
         <button
           class="navbar-toggler"
@@ -85,68 +88,110 @@
     </nav>
     <section class="page-section clearfix">
       <div class="container">
-        <div class="intro">
+        <div class="intro" id="main-bg-box">
           <img
-            class="intro-img img-fluid mb-3 mb-lg-0 rounded"
-            src="assets/img/intro.jpg"
-            alt="..."
+            class="intro-img img-fluid mb-3 mb-lg-0"
+            src="assets/img/intro1.jpg"
+            alt="메인 이미지"
+            id="main-bg1"
           />
-          <!-- <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-            <h2 class="section-heading mb-4">
-              <span class="section-heading-upper">Fresh Coffee</span>
-              <span class="section-heading-lower">Worth Drinking</span>
-            </h2>
-            <p class="mb-3">
-              Every cup of our quality artisan coffee starts with locally
-              sourced, hand picked ingredients. Once you try it, our coffee will
-              be a blissful addition to your everyday morning routine - we
-              guarantee it!
-            </p>
-            <div class="intro-button mx-auto">
-              <a class="btn btn-primary btn-xl" href="#!">Visit Us Today!</a>
-            </div>
-          </div> -->
+          <img
+            class="intro-img img-fluid mb-3 mb-lg-0"
+            src="assets/img/intro2.jpg"
+            alt="메인 이미지"
+            id="main-bg2"
+          />
         </div>
       </div>
     </section>
-    <section class="page-section cta">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <div class="cta-inner bg-faded text-center rounded">
-              <h2 class="section-heading mb-4">
-                <span class="section-heading-upper">Our Promise</span>
-                <span class="section-heading-lower">To You</span>
-              </h2>
-              <p class="mb-0">
-                https://startbootstrap.com/previews/agency
-              </p>
-              <p>
-                우리가 할 서비스
-              </p>
-              <p>
-                우리가 할 서비스 1. 주변 동물병원 위치 찾기(댓글처럼 후기) 2.
-                애견 카페 찾기(추천=>조회수)
-              </p>
-              <p>
-                우리가 할 서비스 1. 주변 동물병원 위치 찾기(댓글처럼 후기) 2.
-                애견 카페 찾기(추천=>조회수)
-              </p>
-              <p>
-                개발한 사람들
-              </p>
-            </div>
-            <div>
-              네비게이션 바 (fixed)
-              <span>내가 등록한 위치 저장</span>
-            </div>
-          </div>
+    <!-- 우리가 할 서비스
+            우리가 할 서비스 1. 주변 동물병원 위치 찾기(댓글처럼 후기) 2.
+            애견 카페 찾기(추천=>조회수)
+            우리가 할 서비스 1. 주변 동물병원 위치 찾기(댓글처럼 후기) 2.
+            애견 카페 찾기(추천=>조회수)
+            개발한 사람들
+            네비게이션 바 (fixed)-->
+
+    <!-- 관리자 -->
+    <div id="admin-box">
+      <button id="admin-btn">관리자</button>
+    </div>
+    <div id="admin-contents">
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">박제이</h5>
+          <p class="card-text">
+            Node.js Developer
+          </p>
+          <a
+            class="btn btn-dark btn-social mx-2"
+            href="#!"
+            aria-label="J Facebook Profile"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
         </div>
       </div>
-    </section>
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">김진솔</h5>
+          <p class="card-text">
+            Node.js Developer
+          </p>
+          <a
+            class="btn btn-dark btn-social mx-2"
+            href="#!"
+            aria-label="J Facebook Profile"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">정호영</h5>
+          <p class="card-text">
+            Front-end Developer
+          </p>
+          <a
+            class="btn btn-dark btn-social mx-2"
+            href="#!"
+            aria-label="J Facebook Profile"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">최지현</h5>
+          <p class="card-text">
+            Front-end Developer
+          </p>
+          <a
+            class="btn btn-dark btn-social mx-2"
+            href="#!"
+            aria-label="J Facebook Profile"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- 내가 등록한 위치 저장 -->
+    <div class="floatingdiv">
+      <ul>
+        <li>내가 등록한 정보</li>
+        <!-- 등록한 정보가 없다면 없다. 있다면 있다. -->
+      </ul>
+    </div>
     <footer class="footer text-faded text-center py-5">
       <div class="container">
-        <p class="m-0 small">Copyright &copy; Your Website 2022</p>
+        <p class="m-0 small">Copyright &copy; D-First-7 Website 2022</p>
       </div>
     </footer>
     <!-- Bootstrap core JS-->
