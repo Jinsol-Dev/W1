@@ -4213,6 +4213,7 @@ fieldset:disabled .btn {
 
 .nav {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   padding-left: 0;
   margin-bottom: 0;
