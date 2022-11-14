@@ -8,7 +8,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Business Casual - Start Bootstrap Theme</title>
+    <title>애견카페</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script
@@ -25,7 +25,7 @@
       rel="stylesheet"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/petcafe_styles.css" rel="stylesheet" />
   </head>
   <body>
     <header>
@@ -86,11 +86,7 @@
     <section class="page-section about-heading">
       <div class="container">
         <!--지도 위치-->
-        <img
-          class="img-fluid rounded about-heading-img mb-3 mb-lg-0"
-          src="assets/img/about.jpg"
-          alt="..."
-        />
+        <div id="map" style="width:100%;height:600px;"></div>
         <div class="about-heading-content">
           <div class="row">
             <div class="col-xl-9 col-lg-10 mx-auto">
@@ -121,6 +117,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=545cc96d09786ffe845c61f5ffc02352&libraries=services,clusterer,drawing"></script>
+    <script src="js/petcafe_scripts.js"></script>
   </body>
 </html>
