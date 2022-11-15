@@ -95,7 +95,7 @@ def petcafe_Gyeonggi_post():
     return jsonify({'msg': '완료!'})
 
 
-@app.route("/petcafe", methods=["GET"])
+@app.route("/petcafe_get", methods=["GET"])
 def petcafe_Gyeonggi_get():
     petcafe_list = list(db.petcafe.find({}, {'_id': False}))
     return jsonify({'petcafe': petcafe_list})
