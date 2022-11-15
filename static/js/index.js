@@ -1,9 +1,7 @@
-console.log('hi')
 const test = document.getElementById('testbtn')
 test.addEventListener('click', save_test)
 
 function save_test() {
-  console.log('hi')
   $.ajax({
     type: 'POST',
     url: '/',
