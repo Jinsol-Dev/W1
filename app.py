@@ -3,8 +3,8 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-client = MongoClient("mongodb+srv://test:sparta@cluster0.lwbd7w1.mongodb.net/Cluster0?retryWrites=true&w=majority")
-db = client.dbsparta
+client = MongoClient("mongodb+srv://fmp:1234@fmp.fm5gjur.mongodb.net/?retryWrites=true&w=majority")
+db = client.fmp
 
 # 호영
 @app.route('/')
@@ -13,11 +13,13 @@ def home():
 
 @app.route("/", methods=["POST"])
 def home_post():
-  
-  doc={
+  box_receive = request.form['box_give']
+  print(request)
+  doc={'box' : box_receive,
+       'a' :2
   }
   
-  db.mars.insert_one(doc)
+  db.fmp.insert_one(doc)
   return jsonify({'msg': '완료!'})
 
 @app.route("/", methods=["GET"])
@@ -87,7 +89,7 @@ def petcafe_suwon_get():
 # 진솔
 @app.route('/petcafe/seoul')
 def petcafe_seoul():
-  return render_template('petcafe.html')
+  return render_template('petcafe_seoul.html')
 
 @app.route("/petcafe/seoul", methods=["POST"])
 def petcafe_seoul_post():
