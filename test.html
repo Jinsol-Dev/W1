@@ -1,29 +1,78 @@
-<div class="accordion-item">
-  <h2 class="accordion-header" id="headingTwo">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo"> -->
     <button
       class="accordion-button collapsed"
       type="button"
       data-bs-toggle="collapse"
-      data-bs-target="#collapse"
-      id
+      data-bs-target="targetId"
       aria-expanded="false"
       aria-controls="collapseTwo"
+    ></button>
+    <!-- ${el.title} -->
+    <!-- </h2> -->
+
+    <div
+      id="targetedId"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingTwo"
+      data-bs-parent="#accordionExample"
     >
-      <%=i.title%>
-    </button>
-  </h2>
-  <div
-    id="collapse"
-    id
-    class="accordion-collapse collapse"
-    aria-labelledby="headingTwo"
-    data-bs-parent="#accordionExample"
-  >
-    <div class="accordion-body">
-      <div class="content-container">
-        <%=i.content%>
+      <div class="accordion-body">
+        <div class="content-container">
+          <!-- ${el.content} -->
+        </div>
+        <article class="reply-article">
+          <!-- ${replyBox} -->
+        </article>
       </div>
-      <article class="reply-article"></article>
     </div>
-  </div>
-</div>
+    <!-- </div> -->
+    <script>
+      const firstDiv = document.createElement('div')
+      firstDiv.className = 'accordion-item'
+      const firsth2 = document.createElement('h2')
+      firsth2.className = 'accordion-header'
+      firsth2.setAttribute('id', 'headingTwo')
+      const firstbtn = document.createElement('button')
+      firstbtn.className = 'ccordion-button'
+      firstbtn.classList.add('collapsed')
+      firstbtn.setAttribute('type', 'button')
+      firstbtn.setAttribute('data-bs-toggle', 'collapse')
+      firstbtn.setAttribute('data-bs-target', 'targetId')
+      firstbtn.setAttribute('aria-expanded', 'false')
+      firstbtn.setAttribute('aria-controls', 'collapseTwo')
+      firsth2.appendChild(firstbtn)
+
+      const secondDiv = document.createElement('div')
+      secondDiv.className = 'accordion-collapse'
+      secondDiv.classList.add('collapse')
+      secondDiv.setAttribute('id', 'targetedId')
+      secondDiv.setAttribute('aria-labelledby', 'headingTwo')
+      secondDiv.setAttribute('data-bs-parent', '#accordionExample')
+
+      const thirdDiv = document.createElement('div')
+      thirdDiv.className = 'accordion-body'
+      const fourthDiv = document.createElement('div')
+      fourthDiv.className = 'content-container'
+      const firstArticle = document.createElement('article')
+      firstArticle.className = 'reply-article'
+      thirdDiv.appendChild(fourthDiv)
+      thirdDiv.appendChild(firstArticle)
+      secondDiv.appendChild(thirdDiv)
+      firstDiv.appendChild(firsth2)
+      firstDiv.appendChild(secondDiv)
+
+      const box = document.body
+      box.append(firstDiv)
+    </script>
+  </body>
+</html>

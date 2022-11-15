@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
+import datetime as dt
+
 
 app = Flask(__name__)
 
@@ -48,17 +50,19 @@ def board_post():
   db.board.insert_one(doc)
   return render_template('board.html')
 
-@app.route("/board", methods=["POST"])
-def board_post():
-  title_value = request.form["title"]
+@app.route("/board/<id>", methods=["POST"])
+def board_post_comment(id):
+  comment_id = id
   content_value = request.form["content"]
+  now = dt.datetime.now()
   doc={
     # 유저 값 토큰에서 받아서 넣어야 함.
-    'title' : title_value,
-    'content' : content_value
+    'comment_id' : comment_id,
+    'content' : content_value,
+    'createdAt' : now.strftime("%x %X")
   }
   
-  db.board.insert_one(doc)
+  db.comments.insert_one(doc)
   return render_template('board.html')
 
 @app.route("/board/get", methods=["GET"])
@@ -68,9 +72,9 @@ def board_get():
   decoded_all_article = []
   for document in all_article :
     document['_id'] = str(document['_id'])
+    all_comments = list(db.comments.find({'comment_id' : document['_id']}, {'_id':False}))
+    document['comments'] = all_comments
     decoded_all_article.append(document)
-    
-  all_comments = list(db.comments.find({}, {'_id':False}))
   
   return jsonify({'articles': decoded_all_article})
 
