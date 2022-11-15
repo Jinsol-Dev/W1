@@ -48,14 +48,30 @@ def board_post():
   db.board.insert_one(doc)
   return render_template('board.html')
 
+@app.route("/board", methods=["POST"])
+def board_post():
+  title_value = request.form["title"]
+  content_value = request.form["content"]
+  doc={
+    # 유저 값 토큰에서 받아서 넣어야 함.
+    'title' : title_value,
+    'content' : content_value
+  }
+  
+  db.board.insert_one(doc)
+  return render_template('board.html')
+
 @app.route("/board/get", methods=["GET"])
 def board_get():
   all_article = list(db.board.find({}))
+  
   decoded_all_article = []
   for document in all_article :
     document['_id'] = str(document['_id'])
     decoded_all_article.append(document)
-
+    
+  all_comments = list(db.comments.find({}, {'_id':False}))
+  
   return jsonify({'articles': decoded_all_article})
 
 @app.route('/petcafe')

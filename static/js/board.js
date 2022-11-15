@@ -21,6 +21,23 @@ function show_articles() {
         Item.className = 'accordion-item'
         const targetId = '#collapse' + el._id
         const targetedId = 'collapse' + el._id
+
+        const replyBox = document.createElement('div')
+        replyBox.className = 'reply-box'
+
+        // el.comments.map((el) => {
+        //   const replyContent = document.createElement('div')
+        //   replyContent.className = 'reply-container'
+        //   replyContent.innerHTML = `
+        //     <p class="reply-content">${el.content}</p>
+        //     <p class="reply-created">${new Date(
+        //       el.createdAt,
+        //     ).toLocaleString()}</p>
+        //   `
+        //   replyBox.appendChild(replyContent)
+        // })
+
+        // if (el.comments.length === 0) {
         Item.innerHTML = `
        <div class="accordion-item">
           <h2 class="accordion-header" id="headingTwo">
@@ -39,11 +56,42 @@ function show_articles() {
                 ${el.content}
               </div>
               <article class="reply-article">
+                <p>등록된 댓글이 없습니다.</p>
+                <form action="/board/${el._id}/comments" method="post" class="input-reply">
+                  <input type="text" id="replyInput" name='content'/>
+                  <input type="submit" value="등록" >
+                </form>
               </article>
             </div>
           </div>
         </div>
      `
+        // } else {
+        //   Item.innerHTML = `
+        //   <div class="accordion-item">
+        //   <h2 class="accordion-header" id="headingTwo">
+        //   <button
+        //   class="accordion-button collapsed"
+        //   type="button"
+        //   data-bs-toggle="collapse"
+        //   data-bs-target=${targetId}
+        //   aria-expanded="false" aria-controls="collapseTwo" > ${el.title}
+        //   </h2>
+        //   <div id=${targetedId}
+        //     class="accordion-collapse collapse" aria-labelledby="headingTwo"
+        //     data-bs-parent="#accordionExample" >
+        //     <div class="accordion-body">
+        //       <div class="content-container">
+        //       ${el.content}
+        //       </div>
+        //       <article class="reply-article">
+        //       ${replyBox}
+        //       </article>
+        //     </div>
+        //     </div>
+        //     </div>
+        //     `
+        // }
         accordion.appendChild(Item)
       })
     },
@@ -63,8 +111,5 @@ function show_articles() {
 //                   </div>
 //                 <%}%>
 //               <%}%>
-//               <form action="/community/<%=i.id%>/comments" method="post" class="input-reply">
-//                 <input type="text" id="replyInput" name='content'/>
-//                 <input type="submit" value="등록" >
-//               </form>
+
 //             </article>
