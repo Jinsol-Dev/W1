@@ -1,24 +1,53 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
-import time
-from selenium import webdriver
 
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
+from bs4 import BeautifulSoup
+import time
 
 app = Flask(__name__)
 
 client = MongoClient("mongodb+srv://fmp:1234@fmp.fm5gjur.mongodb.net/?retryWrites=true&w=majority")
 db = client.fmp
 
+# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+# driver.get("https://map.kakao.com/")
+#
+# driver.find_element(By.ID, "search.keyword.query").send_keys('경기도 애견 카페')
+# driver.find_element(By.ID, 'search.keyword.submit').send_keys(Keys.ENTER)
+#
+# time.sleep(2)
+#
+# html = driver.page_source
+# soup = BeautifulSoup(html, 'html.parser')
+#
+# cafe_lists = soup.select('#info\.search\.place\.list > li')
+# for cafe in cafe_lists:
+#     name = cafe.select_one('div.head_item.clickArea > strong > a.link_name').text
+#     time = cafe.select_one('div.info_item > div.openhour > p > a').text
+#     phone = cafe.select_one('div.info_item > div.contact.clickArea > span.phone').text
+#     category = name.replace(name, '카페')
+#
+#     doc = {'name': name,
+#            'time': time,
+#            'phone': phone,
+#            'category': category
+#            }
+#
+#     db.petcafe.insert_one(doc)
+#
+# time.sleep(2)
+#
+# driver.quit()
 
 # 호영
 @app.route('/')
 def home():
     return render_template('index.html')
-
 
 @app.route("/", methods=["POST"])
 def home_post():
@@ -63,41 +92,13 @@ def petcafe():
 
 @app.route("/petcafe", methods=["POST"])
 def petcafe_Gyeonggi_post():
-    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    #
-    # driver.get("https://map.kakao.com/")
-    #
-    # search_area = driver.find_element(by=By.XPATH, value='//*[@id="search.keyword.query"]')  # 검색 창
-    # search_area.send_keys('경기도 애견 카페')  # 검색어 입력
-    # driver.find_element(by=By.XPATH, value='//*[@id="search.keyword.submit"]').send_keys(Keys.RETURN)  # Enter로 검색
-    #
-    # time.sleep(2)
-    #
-    # from bs4 import BeautifulSoup
-    # html = driver.page_source
-    # soup = BeautifulSoup(html, 'html.parser')
-    # cafe_lists = soup.select('#info\.search\.place\.list > li')
-    #
-    # for cafe in cafe_lists:
-    #     name = cafe.select_one('div.head_item.clickArea > strong > a.link_name').text  # cafeName
-    #     time = cafe.select_one('div.info_item > div.openhour > p > a').text
-    #     phone = cafe.select_one('div.info_item > div.contact.clickArea > span.phone').text
-    #     category = name.replace(name, '카페')
-    #
-    #     doc = {'name': name,
-    #            'time': time,
-    #            'phone': phone,
-    #            'category': category
-    #            }
-    #
-    #     db.petcafe.insert_one(doc)
     return jsonify({'msg': '완료!'})
 
 
 @app.route("/petcafe", methods=["GET"])
 def petcafe_Gyeonggi_get():
-    all_article = list(db.petcafe.find({}, {'_id': False}))
-    return jsonify({'orders': all_article})
+    petcafe_list = list(db.petcafe.find({}, {'_id': False}))
+    return jsonify({'petcafe': petcafe_list})
 
 
 # 진솔
