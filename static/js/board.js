@@ -21,7 +21,6 @@ function show_articles() {
         Item.className = 'accordion-item'
         const targetId = '#collapse' + el._id
         const targetedId = 'collapse' + el._id
-        const onlyId = 1
         Item.innerHTML = `
        <div class="accordion-item">
           <h2 class="accordion-header" id="headingTwo">
@@ -39,20 +38,13 @@ function show_articles() {
               <div class="content-container">
                 ${el.content}
               </div>
-              <article class="reply-article" id = ${onlyId}>
+              <article class="reply-article">
               </article>
             </div>
           </div>
         </div>
      `
-        // const replybox = document.getElementById(onlyId)
-        // console.dir(replybox)
-        // if (!el.contents) {
-        //   const p = document.createElement('p')
-        //   p.innerText = '등록된 글이 없습니다.'
-        //   replybox.appendChild(p)
-        // }
-        // accordion.appendChild(Item)
+        accordion.appendChild(Item)
       })
     },
   })

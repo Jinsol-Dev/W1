@@ -6,6 +6,8 @@ app = Flask(__name__)
 client = MongoClient("mongodb+srv://fmp:1234@fmp.fm5gjur.mongodb.net/?retryWrites=true&w=majority")
 db = client.fmp
 
+
+
 # 호영
 @app.route('/')
 def home():
@@ -48,8 +50,13 @@ def board_post():
 
 @app.route("/board/get", methods=["GET"])
 def board_get():
-  all_article = list(db.board.find({},{'_id':False}))
-  return jsonify({'articles': all_article})
+  all_article = list(db.board.find({}))
+  decoded_all_article = []
+  for document in all_article :
+    document['_id'] = str(document['_id'])
+    decoded_all_article.append(document)
+
+  return jsonify({'articles': decoded_all_article})
 
 @app.route('/petcafe')
 def petcafe():
@@ -108,3 +115,6 @@ def petcafe_seoul_post():
 def petcafe_seoul_get():
   all_article = list(db.article.find({},{'_id':False}))
   return jsonify({'orders': all_article})
+
+if __name__ == '__main__':
+    app.run('0.0.0.0', port=5000, debug=True) 
