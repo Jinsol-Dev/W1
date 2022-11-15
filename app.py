@@ -35,18 +35,22 @@ def board():
 
 @app.route("/board", methods=["POST"])
 def board_post():
-  
+  title_value = request.form["title"]
+  content_value = request.form["content"]
   doc={
+    # 유저 값 토큰에서 받아서 넣어야 함.
+    'title' : title_value,
+    'content' : content_value
   }
   
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
+  db.board.insert_one(doc)
+  return render_template('board.html')
 
-@app.route("/board", methods=["GET"])
+@app.route("/board/get", methods=["GET"])
 def board_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
- 
+  all_article = list(db.board.find({},{'_id':False}))
+  return jsonify({'articles': all_article})
+
 @app.route('/petcafe')
 def petcafe():
   return render_template('petcafe.html')
@@ -104,26 +108,3 @@ def petcafe_seoul_post():
 def petcafe_seoul_get():
   all_article = list(db.article.find({},{'_id':False}))
   return jsonify({'orders': all_article})
-  
-  
-# 제이
-@app.route('/petcafe/incheon')
-def petcafe_incheon():
-  return render_template('petcafe.html')
-
-@app.route("/petcafe/incheon", methods=["POST"])
-def petcafe_incheon_post():
-  
-  doc={
-  }
-  
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
-
-@app.route("/petcafe/incheon", methods=["GET"])
-def petcafe_incheon_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
-  
-if __name__ == '__main__':
-  app.run('0.0.0.0', port=5000, debug=True)
