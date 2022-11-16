@@ -37,12 +37,13 @@ function show_articles() {
             <div class="accordion-body">
               <div class="content-container">
                 ${el.content}
+                <hr style="width:95%; height: 1px; background-color: black;">
               </div>
               <article class="reply-article">
                 <p>등록된 댓글이 없습니다.</p>
                 <form action="/board/${el._id}" method="post" class="input-reply">
-                  <input type="text" id="replyInput" name='content'/>
-                  <input type="submit" value="등록" >
+                  <input type="text" id="replyInput" name='content' placeholder="댓글을 입력해주세요."/>
+                  <input type="submit" value="등록" style="margin-top: 0.5rem;">
                 </form>
               </article>
             </div>
@@ -98,8 +99,8 @@ function show_articles() {
           formDiv.setAttribute('action', `/board/${el._id}`)
           formDiv.setAttribute('method', 'post')
           formDiv.innerHTML = `
-          <input type="text" id="replyInput" name='content'/>
-          <input type="submit" value="등록" ></input>
+          <input type="text" id="replyInput" name='content' placeholder="댓글을 입력하세요."/>
+          <input class="registration" type="submit" value="등록" style="margin-top: 0.5rem;"></input>
           `
           firstArticle.appendChild(formDiv)
 
