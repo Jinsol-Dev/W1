@@ -12,8 +12,10 @@ function show_articles() {
       const boardArticles = [...response.articles]
 
       const accordion = document.getElementById('accordionExample')
-      console.log(boardArticles[0])
-      boardArticles.map((el) => {
+      const orderedDate = boardArticles.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      )
+      orderedDate.map((el) => {
         const Item = document.createElement('div')
         Item.className = 'accordion-item'
         const targetId = '#collapse' + el._id
