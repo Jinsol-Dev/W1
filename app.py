@@ -115,23 +115,18 @@ def petcafe_get():
   
 
   # 지현 
-@app.route('/petcafe/suwon')
-def petcafe_suwon():
+@app.route('/gyunggi')
+def petcafe_Gyeonggi():
   return render_template('petcafe.html')
 
-@app.route("/petcafe/suwon", methods=["POST"])
-def petcafe_suwon_post():
-  
-  doc={
-  }
-  
-  db.mars.insert_one(doc)
+@app.route("/gyunggi", methods=["POST"])
+def petcafe_Gyeonggi_post():
   return jsonify({'msg': '완료!'})
 
-@app.route("/petcafe/suwon", methods=["GET"])
-def petcafe_suwon_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
+@app.route("/gyunggi_get", methods=["GET"])
+def petcafe_Gyeonggi_get():
+  petcafe_list = list(db.petcafe.find({}, {'_id': False}))
+  return jsonify({'petcafes': petcafe_list})
 
 
 # 진솔
