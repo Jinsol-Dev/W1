@@ -15,8 +15,6 @@ app = Flask(__name__)
 client = MongoClient("mongodb+srv://fmp:1234@fmp.fm5gjur.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=ca)
 db = client.fmp
 
-
-
 # 호영
 @app.route('/')
 def home():
@@ -130,25 +128,18 @@ def petcafe_Gyeonggi_get():
 
 
 # 진솔
-@app.route('/petcafe/seoul')
-def petcafe_seoul():
-  return render_template('petcafe_seoul.html')
+@app.route('/seoul')
+def pethospital_Seoul():
+  return render_template('pethospital.html')
 
-@app.route("/petcafe/seoul", methods=["POST"])
-def petcafe_seoul_post():
-  
-  doc={
-  }
-  
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
+# @app.route("/seoul", methods=["POST"])
+# def pethospital_Seoul_post(): 
+#     return jsonify({'msg': '완료!'})
 
-@app.route("/petcafe/seoul", methods=["GET"])
-def petcafe_seoul_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
-
-
+@app.route("/seoul_get", methods=["GET"])
+def pethospital_Seoul_get():
+    all_pethospital = list(db.pethospital.find({},{'_id':False}))
+    return jsonify({'pethospital': all_pethospital})
 
 @app.route('/login')
 def login():
