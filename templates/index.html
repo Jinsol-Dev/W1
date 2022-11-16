@@ -28,6 +28,7 @@
     <link href="/static/css/styles.css" rel="stylesheet" />
     <!-- Custom-->
     <link rel="stylesheet" href="/static/css/intro.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/static/js/intro.js" defer></script>
   </head>
   <body>
@@ -42,10 +43,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
       <div class="container">
-        <a
-          class="navbar-brand text-uppercase fw-bold d-lg-none"
-          href="/"
-        >
+        <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="/">
           F.M.P.
         </a>
         <button
@@ -83,8 +81,7 @@
     </nav>
     <section class="page-section clearfix">
       <div class="container">
-        <div class="intro" id="main-bg-box">
-        </div>
+        <div class="intro" id="main-bg-box"></div>
       </div>
     </section>
 
@@ -100,7 +97,11 @@
           </p>
         </div>
         <div class="service-list">
-          <img src="/static/img/community.png" class="img-thumbnail" alt="..." />
+          <img
+            src="/static/img/community.png"
+            class="img-thumbnail"
+            alt="..."
+          />
           <p>
             병원과 카페의 후기를 통해 정보를 나누고
             <br />
@@ -125,13 +126,7 @@
             <p class="card-text">
               Node.js Developer
             </p>
-            <a
-              class="btn btn-dark btn-social mx-2"
-              href="parkjei94@gmail.com"
-              aria-label="J Facebook Profile"
-            >
-              <i class="fab fa-facebook-f"></i>
-            </a>
+            <button class="questadmin" id='jquest'>문의하기</button>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
@@ -141,13 +136,7 @@
             <p class="card-text">
               Node.js Developer
             </p>
-            <a
-              class="btn btn-dark btn-social mx-2"
-              href="jinsol0323@naver.com"
-              aria-label="J Facebook Profile"
-            >
-              <i class="fab fa-facebook-f"></i>
-            </a>
+            <button class="questadmin" id='jsquest'>문의하기</button>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
@@ -157,13 +146,7 @@
             <p class="card-text">
               Front-end Developer
             </p>
-            <a
-              class="btn btn-dark btn-social mx-2"
-              href="#!"
-              aria-label="J Facebook Profile"
-            >
-              <i class="fab fa-facebook-f"></i>
-            </a>
+            <button class="questadmin" id='jbquest'>문의하기</button>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
@@ -173,22 +156,38 @@
             <p class="card-text">
               Front-end Developer
             </p>
-            <a
-              class="btn btn-dark btn-social mx-2"
-              href="#!"
-              aria-label="J Facebook Profile"
-            >
-              <i class="fab fa-facebook-f"></i>
-            </a>
+            <button class="questadmin" id='jhquest'>문의하기</button>
           </div>
         </div>
       </div>
     </div>
+    <!-- 이메일 -->
+    <div class='formbox'>
+      <form id="form">
+        <div class="field">
+        <label for="name">name</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div class="field">
+        <label for="message">message</label>
+        <input type="text" name="message" id="message" />
+      </div>
+      <div class="field">
+        <label for="reply_to">reply_to</label>
+        <input type="text" name="reply_to" id="reply_to" />
+      </div>
+      <div class="btn-container-mail">
+        <input type="submit" id="buttone" value="이메일 보내기" />
+        <input type="cancel" id="buttonc" value="취소" />
+      </div>
+    </form>
+  </div>
     <!-- 내가 등록한 위치 저장 -->
     <div class="floatingdiv">
       <ul>
         <li>내가 등록한 정보</li>
         <!-- 등록한 정보가 없다면 없다. 있다면 있다. -->
+        <button type="submit" id="testbtn">테스트</button>
       </ul>
     </div>
     <footer class="footer text-faded text-center py-5">
@@ -200,5 +199,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      emailjs.init('wWuDAtFKffGpsvUXf')
+    </script>
   </body>
 </html>

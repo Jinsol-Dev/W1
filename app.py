@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
+import datetime as dt
+
 
 app = Flask(__name__)
 
-client = MongoClient("mongodb+srv://test:sparta@cluster0.lwbd7w1.mongodb.net/Cluster0?retryWrites=true&w=majority")
-db = client.dbsparta
+client = MongoClient("mongodb+srv://fmp:1234@fmp.fm5gjur.mongodb.net/?retryWrites=true&w=majority")
+db = client.fmp
+
+
 
 # 호영
 @app.route('/')
@@ -13,11 +17,13 @@ def home():
 
 @app.route("/", methods=["POST"])
 def home_post():
-  
-  doc={
+  box_receive = request.form['box_give']
+  print(request)
+  doc={'box' : box_receive,
+       'a' :2
   }
   
-  db.mars.insert_one(doc)
+  db.fmp.insert_one(doc)
   return jsonify({'msg': '완료!'})
 
 @app.route("/", methods=["GET"])
@@ -33,18 +39,45 @@ def board():
 
 @app.route("/board", methods=["POST"])
 def board_post():
-  
+  title_value = request.form["title"]
+  content_value = request.form["content"]
   doc={
+    # 유저 값 토큰에서 받아서 넣어야 함.
+    'title' : title_value,
+    'content' : content_value
   }
   
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
+  db.board.insert_one(doc)
+  return render_template('board.html')
 
-@app.route("/board", methods=["GET"])
+@app.route("/board/<id>", methods=["POST"])
+def board_post_comment(id):
+  comment_id = id
+  content_value = request.form["content"]
+  now = dt.datetime.now()
+  doc={
+    # 유저 값 토큰에서 받아서 넣어야 함.
+    'comment_id' : comment_id,
+    'content' : content_value,
+    'createdAt' : now.strftime("%x %X")
+  }
+  
+  db.comments.insert_one(doc)
+  return render_template('board.html')
+
+@app.route("/board/get", methods=["GET"])
 def board_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
- 
+  all_article = list(db.board.find({}))
+  
+  decoded_all_article = []
+  for document in all_article :
+    document['_id'] = str(document['_id'])
+    all_comments = list(db.comments.find({'comment_id' : document['_id']}, {'_id':False}))
+    document['comments'] = all_comments
+    decoded_all_article.append(document)
+  
+  return jsonify({'articles': decoded_all_article})
+
 @app.route('/petcafe')
 def petcafe():
   return render_template('petcafe.html')
@@ -87,7 +120,7 @@ def petcafe_suwon_get():
 # 진솔
 @app.route('/petcafe/seoul')
 def petcafe_seoul():
-  return render_template('petcafe.html')
+  return render_template('petcafe_seoul.html')
 
 @app.route("/petcafe/seoul", methods=["POST"])
 def petcafe_seoul_post():
@@ -102,26 +135,6 @@ def petcafe_seoul_post():
 def petcafe_seoul_get():
   all_article = list(db.article.find({},{'_id':False}))
   return jsonify({'orders': all_article})
-  
-  
-# 제이
-@app.route('/petcafe/incheon')
-def petcafe_incheon():
-  return render_template('petcafe.html')
 
-@app.route("/petcafe/incheon", methods=["POST"])
-def petcafe_incheon_post():
-  
-  doc={
-  }
-  
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
-
-@app.route("/petcafe/incheon", methods=["GET"])
-def petcafe_incheon_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
-  
 if __name__ == '__main__':
-  app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=5000, debug=True) 

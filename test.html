@@ -7,20 +7,72 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="map" style="width: 500px; height: 400px;"></div>
+    <!-- <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo"> -->
+    <button
+      class="accordion-button collapsed"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="targetId"
+      aria-expanded="false"
+      aria-controls="collapseTwo"
+    ></button>
+    <!-- ${el.title} -->
+    <!-- </h2> -->
 
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3bbeb21c6c5966adffc8f5be0cbef3a"
-    ></script>
+    <div
+      id="targetedId"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingTwo"
+      data-bs-parent="#accordionExample"
+    >
+      <div class="accordion-body">
+        <div class="content-container">
+          <!-- ${el.content} -->
+        </div>
+        <article class="reply-article">
+          <!-- ${replyBox} -->
+        </article>
+      </div>
+    </div>
+    <!-- </div> -->
     <script>
-      var container = document.getElementById('map') //지도를 담을 영역의 DOM 레퍼런스
-      var options = {
-        //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(34.789, 126.85454), //지도의 중심좌표.
-        level: 3, //지도의 레벨(확대, 축소 정도)
-      }
-      var map = new kakao.maps.Map(container, options) //지도 생성 및 객체 리턴
+      const firstDiv = document.createElement('div')
+      firstDiv.className = 'accordion-item'
+      const firsth2 = document.createElement('h2')
+      firsth2.className = 'accordion-header'
+      firsth2.setAttribute('id', 'headingTwo')
+      const firstbtn = document.createElement('button')
+      firstbtn.className = 'ccordion-button'
+      firstbtn.classList.add('collapsed')
+      firstbtn.setAttribute('type', 'button')
+      firstbtn.setAttribute('data-bs-toggle', 'collapse')
+      firstbtn.setAttribute('data-bs-target', 'targetId')
+      firstbtn.setAttribute('aria-expanded', 'false')
+      firstbtn.setAttribute('aria-controls', 'collapseTwo')
+      firsth2.appendChild(firstbtn)
+
+      const secondDiv = document.createElement('div')
+      secondDiv.className = 'accordion-collapse'
+      secondDiv.classList.add('collapse')
+      secondDiv.setAttribute('id', 'targetedId')
+      secondDiv.setAttribute('aria-labelledby', 'headingTwo')
+      secondDiv.setAttribute('data-bs-parent', '#accordionExample')
+
+      const thirdDiv = document.createElement('div')
+      thirdDiv.className = 'accordion-body'
+      const fourthDiv = document.createElement('div')
+      fourthDiv.className = 'content-container'
+      const firstArticle = document.createElement('article')
+      firstArticle.className = 'reply-article'
+      thirdDiv.appendChild(fourthDiv)
+      thirdDiv.appendChild(firstArticle)
+      secondDiv.appendChild(thirdDiv)
+      firstDiv.appendChild(firsth2)
+      firstDiv.appendChild(secondDiv)
+
+      const box = document.body
+      box.append(firstDiv)
     </script>
   </body>
 </html>

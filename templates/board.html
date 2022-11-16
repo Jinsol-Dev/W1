@@ -25,25 +25,24 @@
       rel="stylesheet"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link href="/static/css/board.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/board.js" defer></script>
   </head>
   <body>
     <header>
       <h1 class="site-heading text-center text-faded d-none d-lg-block">
         <span class="site-heading-upper text-primary mb-3">
-          동사모
+          For My Pet
         </span>
-        <span class="site-heading-lower">차후 정함</span>
+        <span class="site-heading-lower">F.M.P.</span>
       </h1>
     </header>
     <!-- Navigation-->
-    <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
       <div class="container">
-        <a
-          class="navbar-brand text-uppercase fw-bold d-lg-none"
-          href="/"
-        >
+        <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="/">
           F.M.P.
         </a>
         <button
@@ -79,99 +78,83 @@
         </div>
       </div>
     </nav>
-    <section class="page-section cta">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <div class="cta-inner bg-faded text-center rounded">
-              <h2 class="section-heading mb-5">
-                <span class="section-heading-upper">Come On In</span>
-                <span class="section-heading-lower">We're Open</span>
-              </h2>
-              <ul class="list-unstyled list-hours mb-5 text-left mx-auto">
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Sunday
-                  <span class="ms-auto">Closed</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Monday
-                  <span class="ms-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Tuesday
-                  <span class="ms-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Wednesday
-                  <span class="ms-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Thursday
-                  <span class="ms-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Friday
-                  <span class="ms-auto">7:00 AM to 8:00 PM</span>
-                </li>
-                <li class="list-unstyled-item list-hours-item d-flex">
-                  Saturday
-                  <span class="ms-auto">9:00 AM to 5:00 PM</span>
-                </li>
-              </ul>
-              <p class="address mb-5">
-                <em>
-                  <strong>1116 Orchard Street</strong>
-                  <br />
-                  Golden Valley, Minnesota
-                </em>
-              </p>
-              <p class="mb-0">
-                <small><em>Call Anytime</em></small>
-                <br />
-                (317) 585-8468
-              </p>
-            </div>
-          </div>
-        </div>
+    <div class="communityContainer">
+      <div id="communityContainer">
+        <div class="accordion" id="accordionExample"></div>
       </div>
-    </section>
-    <section class="page-section about-heading">
-      <div class="container">
-        <img
-          class="img-fluid rounded about-heading-img mb-3 mb-lg-0"
-          src="assets/img/about.jpg"
-          alt="..."
-        />
-        <div class="about-heading-content">
-          <div class="row">
-            <div class="col-xl-9 col-lg-10 mx-auto">
-              <div class="bg-faded rounded p-5">
-                <h2 class="section-heading mb-4">
-                  <span class="section-heading-upper">
-                    Strong Coffee, Strong Roots
-                  </span>
-                  <span class="section-heading-lower">About Our Cafe</span>
-                </h2>
-                <p>
-                  Founded in 1987 by the Hernandez brothers, our establishment
-                  has been serving up rich coffee sourced from artisan farmers
-                  in various regions of South and Central America. We are
-                  dedicated to travelling the world, finding the best coffee,
-                  and bringing back to you here in our cafe.
-                </p>
-                <p class="mb-0">
-                  We guarantee that you will fall in
-                  <em>lust</em>
-                  with our decadent blends the moment you walk inside until you
-                  finish your last sip. Join us for your daily routine, an
-                  outing with friends, or simply just to enjoy some alone time.
-                </p>
+      <!--받아온 데이터에 따라서 페이지 링크 갯수를 만들어줘야함.-->
+      <nav aria-label="Page navigation example" class="navpage">
+        <!-- Modal -->
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          id="modalBtn"
+          style="float: right;"
+        >
+          입력하기
+        </button>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+          >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  서로 공유하고 싶은 이야기를 남겨요.
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
+              <div class="modal-body">
+                <form
+                  action="/board"
+                  method="post"
+                  class="communityBox"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="title"
+                      name="title"
+                      required
+                    />
+                    <label for="title">글 제목</label>
+                  </div>
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      id="content"
+                      name="content"
+                      style="height: 100px;"
+                      required
+                    ></textarea>
+                    <label for="content">글 내용</label>
+                  </div>
+                  <input type="submit" id="submit" value="등록" />
+                </form>
+              </div>
+              <div class="modal-footer"></div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+        <ul class="pagination" id="page-container"></ul>
+      </nav>
+    </div>
     <footer class="footer text-faded text-center py-5">
       <div class="container">
         <p class="m-0 small">Copyright &copy; Your Website 2022</p>
