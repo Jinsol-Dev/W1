@@ -15,8 +15,6 @@ app = Flask(__name__)
 client = MongoClient("mongodb+srv://fmp:1234@fmp.fm5gjur.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=ca)
 db = client.fmp
 
-
-
 # 호영
 @app.route('/')
 def home():
@@ -95,25 +93,6 @@ def board_get():
   
   return jsonify({'articles': decoded_all_article})
 
-@app.route('/petcafe')
-def petcafe():
-  return render_template('petcafe.html')
-
-@app.route("/petcafe", methods=["POST"])
-def petcafe_post():
-  
-  doc={
-  }
-  
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
-
-@app.route("/petcafe", methods=["GET"])
-def petcafe_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
-  
-
   # 지현 
 @app.route('/gyunggi')
 def petcafe_Gyeonggi():
@@ -130,25 +109,18 @@ def petcafe_Gyeonggi_get():
 
 
 # 진솔
-@app.route('/petcafe/seoul')
-def petcafe_seoul():
-  return render_template('petcafe_seoul.html')
+@app.route('/seoul')
+def pethospital_Seoul():
+  return render_template('pethospital.html')
 
-@app.route("/petcafe/seoul", methods=["POST"])
-def petcafe_seoul_post():
-  
-  doc={
-  }
-  
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
+# @app.route("/seoul", methods=["POST"])
+# def pethospital_Seoul_post(): 
+#     return jsonify({'msg': '완료!'})
 
-@app.route("/petcafe/seoul", methods=["GET"])
-def petcafe_seoul_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
-
-
+@app.route("/seoul_get", methods=["GET"])
+def pethospital_Seoul_get():
+    all_pethospital = list(db.pethospital.find({},{'_id':False}))
+    return jsonify({'pethospital': all_pethospital})
 
 @app.route('/login')
 def login():
@@ -188,8 +160,12 @@ def api_register():
     if db.user.find_one({'id': id_receive}) :
       return jsonify({'msg': '이미 등록된 아이디입니다.'})
     else :
-      db.user.insert_one({'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive})
-      return jsonify({'result': 'success'})
+      # *** 수정 내용 : 닉네임 중복 체크 추가 ***
+      if db.user.find_one({'nick': nickname_receive}) :
+        return jsonify({'msg': '이미 등록된 닉네임입니다.'})
+      else :
+        db.user.insert_one({'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive})
+        return jsonify({'result': 'success'})
     
 # [로그인 API]
 # id, pw를 받아서 맞춰보고, 토큰을 만들어 발급합니다.
@@ -212,7 +188,8 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
-            'exp': dt.datetime.utcnow() + dt.timedelta(minutes=30)
+            # *** 수정 내용 : 30 > 10 (로그인 유지 시간) ***
+            'exp': dt.datetime.utcnow() + dt.timedelta(minutes=10)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
@@ -221,6 +198,20 @@ def api_login():
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+      
+#로그아웃
+@app.route('/api/logout', methods=['POST'])
+def api_logout():
+    token_receive = request.cookies.get('mytoken')
+    
+    userinfo = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    payload = {
+        'id':  userinfo['id'],
+        'exp': dt.datetime.fromtimestamp(0)
+    }
+    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+    # token을 줍니다.
+    return jsonify({'result': 'success', 'token': token})
 
 # [유저 정보 확인 API]
 # 로그인된 유저만 call 할 수 있는 API입니다.
