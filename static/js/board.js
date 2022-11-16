@@ -12,9 +12,8 @@ function show_articles() {
       const boardArticles = [...response.articles]
 
       const accordion = document.getElementById('accordionExample')
-
+      console.log(boardArticles[0])
       boardArticles.map((el) => {
-        console.log(el.comments)
         const Item = document.createElement('div')
         Item.className = 'accordion-item'
         const targetId = '#collapse' + el._id
@@ -41,7 +40,7 @@ function show_articles() {
               </div>
               <article class="reply-article">
                 <p>등록된 댓글이 없습니다.</p>
-                <form action="/board/${el._id}" method="post" class="input-reply">
+                <form action="post/board/${el._id}" method="post" class="input-reply">
                   <input type="text" id="replyInput" name='content' placeholder="댓글을 입력해주세요."/>
                   <input type="submit" value="등록" style="margin-top: 0.5rem;">
                 </form>
@@ -85,7 +84,6 @@ function show_articles() {
           // const dateNow = new Date(el.comments.createdAt).toLocaleString()
           const commentsList = [...el.comments]
           commentsList.map((ele) => {
-            console.log(ele)
             const replyContent = document.createElement('div')
             replyContent.className = 'reply-container'
             replyContent.innerHTML = `
@@ -96,7 +94,7 @@ function show_articles() {
           })
           const formDiv = document.createElement('form')
           formDiv.className = 'input-reply'
-          formDiv.setAttribute('action', `/board/${el._id}`)
+          formDiv.setAttribute('action', `/post/board/${el._id}`)
           formDiv.setAttribute('method', 'post')
           formDiv.innerHTML = `
           <input type="text" id="replyInput" name='content' placeholder="댓글을 입력하세요."/>

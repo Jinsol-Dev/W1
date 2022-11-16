@@ -52,20 +52,22 @@ def home_get():
 def board():
   return render_template('board.html')
 
-@app.route("/board", methods=["POST"])
+@app.route("/post/board", methods=["POST"])
 def board_post():
   title_value = request.form["title"]
   content_value = request.form["content"]
+  now = dt.datetime.now()
   doc={
     # 유저 값 토큰에서 받아서 넣어야 함.
     'title' : title_value,
-    'content' : content_value
+    'content' : content_value,
+    'createdAt' : now.strftime("%x %X")
   }
   
   db.board.insert_one(doc)
-  return render_template('board.html')
+  return redirect(url_for("board"))
 
-@app.route("/board/<id>", methods=["POST"])
+@app.route("/post/board/<id>", methods=["POST"])
 def board_post_comment(id):
   comment_id = id
   content_value = request.form["content"]
@@ -78,7 +80,7 @@ def board_post_comment(id):
   }
   
   db.comments.insert_one(doc)
-  return render_template('board.html')
+  return redirect(url_for("board"))
 
 @app.route("/board/get", methods=["GET"])
 def board_get():
