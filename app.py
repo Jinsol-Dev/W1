@@ -193,8 +193,12 @@ def api_register():
     if db.user.find_one({'id': id_receive}) :
       return jsonify({'msg': '이미 등록된 아이디입니다.'})
     else :
-      db.user.insert_one({'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive})
-      return jsonify({'result': 'success'})
+      # *** 수정 내용 : 닉네임 중복 체크 추가 ***
+      if db.user.find_one({'nick': nickname_receive}) :
+        return jsonify({'msg': '이미 등록된 닉네임입니다.'})
+      else :
+        db.user.insert_one({'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive})
+        return jsonify({'result': 'success'})
     
 # [로그인 API]
 # id, pw를 받아서 맞춰보고, 토큰을 만들어 발급합니다.
@@ -217,7 +221,8 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
-            'exp': dt.datetime.utcnow() + dt.timedelta(minutes=30)
+            # *** 수정 내용 : 30 > 10 (로그인 유지 시간) ***
+            'exp': dt.datetime.utcnow() + dt.timedelta(minutes=10)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
