@@ -1,0 +1,17 @@
+.table {
+  width: 68%;
+  margin: auto auto 5rem auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  color: whitesmoke;
+}
+
+.cafeList:link {
+  
+}
+
+.cafeList:hover {
+  background-color: whitesmoke;
+  color: black;
+
+}
