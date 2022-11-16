@@ -1,0 +1,27 @@
+.table {
+    width: 70%;
+    margin: auto auto 5rem auto;
+    border-radius: 4px;
+  }
+
+.box {
+    width: 70%;
+    margin: auto auto 5rem auto;
+    background-color: whitesmoke;
+    border-radius: 4px;
+  }
+
+.btn1 {
+  all: unset; 
+            background-color: cornflowerblue;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            border-style: dotted;
+            border-color: white;
+            float: right;
+            position: absolute;
+            z-index: 100;       
+            
+}

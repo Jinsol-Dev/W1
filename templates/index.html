@@ -30,13 +30,32 @@
     <link rel="stylesheet" href="/static/css/intro.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/static/js/intro.js" defer></script>
+    <script>
+      $(document).ready(function() {
+        {% if nickname %}
+          $('#loginandlogout').text(`로그아웃 / {{ nickname }}`)
+          // *** 수정 내용 : 등록한 정보 버튼 보이지 않는 처리 추가 ***
+          $('#floatingdiv').show()
+      {% endif %}
+      });
+
+      function loginandlogout() {
+        if ($("#loginandlogout").text() == "로그인") {
+          window.location.href = "./login";
+        } else {
+          logout();
+        }
+      }
+      function logout() {
+        $.removeCookie("mytoken");
+        window.location.href = "/";
+      }
+    </script>
   </head>
   <body>
     <header>
       <h1 class="site-heading text-center text-faded d-none d-lg-block">
-        <span class="site-heading-upper text-primary mb-3">
-          For My Pet
-        </span>
+        <span class="site-heading-upper text-primary mb-3"> For My Pet </span>
         <span class="site-heading-lower">F.M.P.</span>
       </h1>
     </header>
@@ -68,9 +87,7 @@
               </a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase" href="/board">
-                자유 게시판
-              </a>
+              <a class="nav-link text-uppercase" href="/board"> 자유 게시판 </a>
             </li>
             <li class="nav-item px-lg-4" id='isLoged'>
             </li>
@@ -118,69 +135,61 @@
     </div>
     <div class="admin-container">
       <div id="admin-contents">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem">
           <img src="/static/img/team1.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">박제이</h5>
-            <p class="card-text">
-              Node.js Developer
-            </p>
-            <button class="questadmin" id='jquest'>문의하기</button>
+            <p class="card-text">Node.js Developer</p>
+            <button class="questadmin" id="jquest">문의하기</button>
           </div>
         </div>
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem">
           <img src="/static/img/team2.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">김진솔</h5>
-            <p class="card-text">
-              Node.js Developer
-            </p>
-            <button class="questadmin" id='jsquest'>문의하기</button>
+            <p class="card-text">Node.js Developer</p>
+            <button class="questadmin" id="jsquest">문의하기</button>
           </div>
         </div>
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem">
           <img src="/static/img/team4.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">정호영</h5>
-            <p class="card-text">
-              Front-end Developer
-            </p>
-            <button class="questadmin" id='jbquest'>문의하기</button>
+            <p class="card-text">Front-end Developer</p>
+            <button class="questadmin" id="jbquest">문의하기</button>
           </div>
         </div>
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem">
           <img src="/static/img/team3.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">최지현</h5>
-            <p class="card-text">
-              Front-end Developer
-            </p>
-            <button class="questadmin" id='jhquest'>문의하기</button>
+            <p class="card-text">Front-end Developer</p>
+            <button class="questadmin" id="jhquest">문의하기</button>
           </div>
         </div>
       </div>
     </div>
     <!-- 이메일 -->
-    <div class='formbox'>
+    <div class="formbox">
       <form id="form">
         <div class="field">
-        <label for="name">name</label>
-        <input type="text" name="name" id="name" />
-      </div>
-      <div class="field">
-        <label for="message">message</label>
-        <input type="text" name="message" id="message" />
-      </div>
-      <div class="field">
-        <label for="reply_to">reply_to</label>
-        <input type="text" name="reply_to" id="reply_to" />
-      </div>
-      <div class="btn-container-mail">
-        <input type="submit" id="buttone" value="이메일 보내기" />
-        <input type="cancel" id="buttonc" value="취소" />
-      </div>
-    </form>
-  </div>
+          <label for="name">name</label>
+          <input type="text" name="name" id="name" />
+        </div>
+        <div class="field">
+          <label for="message">message</label>
+          <input type="text" name="message" id="message" />
+        </div>
+        <div class="field">
+          <label for="reply_to">reply_to</label>
+          <input type="text" name="reply_to" id="reply_to" />
+        </div>
+        <div class="btn-container-mail">
+          <input type="submit" id="buttone" value="이메일 보내기" />
+          <input type="cancel" id="buttonc" value="취소" />
+        </div>
+      </form>
+    </div>
     <!-- 내가 등록한 위치 저장 -->
     <div class="floatingdiv">
       <ul>
@@ -203,7 +212,7 @@
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
     ></script>
     <script type="text/javascript">
-      emailjs.init('wWuDAtFKffGpsvUXf')
+      emailjs.init("wWuDAtFKffGpsvUXf");
     </script>
   </body>
 </html>
