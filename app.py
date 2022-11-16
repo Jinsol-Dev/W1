@@ -16,38 +16,38 @@ db = client.fmp
 
 # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 # driver.get("https://map.kakao.com/")
-#
+
 # driver.find_element(By.ID, "search.keyword.query").send_keys('경기도 애견 카페')
 # driver.find_element(By.ID, 'search.keyword.submit').send_keys(Keys.ENTER)
-#
-# time.sleep(2)
-#
+
+# time.sleep(4)
+
 # html = driver.page_source
 # soup = BeautifulSoup(html, 'html.parser')
-#
+
 # cafe_lists = soup.select('#info\.search\.place\.list > li')
 # for cafe in cafe_lists:
 #     name = cafe.select_one('div.head_item.clickArea > strong > a.link_name').text
 #     time = cafe.select_one('div.info_item > div.openhour > p > a').text
 #     phone = cafe.select_one('div.info_item > div.contact.clickArea > span.phone').text
 #     category = name.replace(name, '카페')
-#
+
 #     doc = {'name': name,
 #            'time': time,
 #            'phone': phone,
 #            'category': category
 #            }
-#
+
 #     db.petcafe.insert_one(doc)
-#
-# time.sleep(2)
-#
+
 # driver.quit()
 
 # 호영
+
 @app.route('/')
 def home():
     return render_template('index.html')
+
 
 @app.route("/", methods=["POST"])
 def home_post():
@@ -91,7 +91,7 @@ def petcafe():
 
 
 @app.route("/petcafe", methods=["POST"])
-def petcafe_Gyeonggi_post():
+def petcafe_Gyeonggi_post():   
     return jsonify({'msg': '완료!'})
 
 
