@@ -93,25 +93,6 @@ def board_get():
   
   return jsonify({'articles': decoded_all_article})
 
-@app.route('/petcafe')
-def petcafe():
-  return render_template('petcafe.html')
-
-@app.route("/petcafe", methods=["POST"])
-def petcafe_post():
-  
-  doc={
-  }
-  
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
-
-@app.route("/petcafe", methods=["GET"])
-def petcafe_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
-  
-
   # 지현 
 @app.route('/gyunggi')
 def petcafe_Gyeonggi():
@@ -217,6 +198,20 @@ def api_login():
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+      
+#로그아웃
+@app.route('/api/logout', methods=['POST'])
+def api_logout():
+    token_receive = request.cookies.get('mytoken')
+    
+    userinfo = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    payload = {
+        'id':  userinfo['id'],
+        'exp': dt.datetime.fromtimestamp(0)
+    }
+    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+    # token을 줍니다.
+    return jsonify({'result': 'success', 'token': token})
 
 # [유저 정보 확인 API]
 # 로그인된 유저만 call 할 수 있는 API입니다.
