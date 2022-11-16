@@ -25,7 +25,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption)
 var ps = new kakao.maps.services.Places()
 
 // 키워드로 장소를 검색합니다
-ps.keywordSearch('진접 애견 카페', placesSearchCB)
+ps.keywordSearch('경기도 애견 카페', placesSearchCB)
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
@@ -60,4 +60,42 @@ function displayMarker(place) {
     )
     infowindow.open(map, marker)
   })
+}
+
+
+
+$(document).ready(function () {
+  show()
+})
+
+function show() {
+  $.ajax({
+      type: "GET",
+      url: '/gyunggi_get',
+      data: {},
+      success: function (response) {
+          let rows = response['petcafes']
+          for (let i = 0; i < rows.length; i++) {
+              let name = rows[i]['name']
+              let time = rows[i]['time']
+              let phone = rows[i]['phone']
+              let category = rows[i]['category']
+
+              let temp_html = `<tr class="cafeList" onclick="showModal()">
+                        <th scope="row">${category}</th>
+                        <td>${name}</td>
+                        <td>${time}</td>
+                        <td>${phone}</td>
+                      </tr>`
+              $('#list').append(temp_html)
+          }
+      }
+  })
+}
+
+
+
+
+function showModal(){
+  $("#myModal").modal("show");
 }

@@ -26,23 +26,26 @@
     />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/static/css/styles.css" rel="stylesheet"/>
+    <link href="/static/css/petcafe_styles.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+            integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-    <h1 class="site-heading text-center text-faded d-none d-lg-block">
-        <span class="site-heading-upper text-primary mb-3">
-          동사모
-        </span>
-        <span class="site-heading-lower">차후 정함</span>
-    </h1>
-</header>
+    <header>
+      <h1 class="site-heading text-center text-faded d-none d-lg-block">
+        <span class="site-heading-upper text-primary mb-3"> For My Pet </span>
+        <span class="site-heading-lower">F.M.P.</span>
+      </h1>
+    </header>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
       <div class="container">
-        <a
-          class="navbar-brand text-uppercase fw-bold d-lg-none"
-          href="/"
-        >
+        <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="/">
           F.M.P.
         </a>
         <button
@@ -62,17 +65,19 @@
               <a class="nav-link text-uppercase" href="/">홈</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase" href="/petcafe">
-                우리동네 애견시설
+              <a class="nav-link text-uppercase" href="/gyunggi">
+                우리 동네 애견 카페
               </a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase" href="/board">
-                자유 게시판
+              <a class="nav-link text-uppercase" href="/seoul">
+                우리 동네 동물 병원
               </a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase" href="#">로그인</a>
+              <a class="nav-link text-uppercase" href="/board"> 자유 게시판 </a>
+            </li>
+            <li class="nav-item px-lg-4" id='isLoged'>
             </li>
           </ul>
         </div>
@@ -83,28 +88,37 @@
         <div id="map" style="width:100%;height:600px;">
         <!--지도 위치-->
         </div>
-        <div class="about-heading-content">
-            <div class="row">
-                <div class="col-xl-9 col-lg-10 mx-auto">
-                    <div class="bg-faded rounded p-5">
-                        <h2 class="section-heading mb-4">
-                  <span class="section-heading-upper">
-                    현재 위치 :(신정동)
-                  </span>
-                            <span class="section-heading-lower">주변 동물병원</span>
-                        </h2>
-                        <p></p>
-                        <p class="mb-0">
-                            <em>목록</em>
-                        <p>댓글(별점 : 후기)</p>
-                        <p>페이지네이션</p>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
+  <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">분류</th>
+        <th scope="col">이름</th>
+        <th scope="col">영업시간</th>
+        <th scope="col">전화번호</th>
+    </tr>
+    </thead>
+    <tbody id="list">
+    </tbody>
+  </table>
+  <div class="modal" id="myModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <footer class="footer text-faded text-center py-5">
     <div class="container">
         <p class="m-0 small">Copyright &copy; Your Website 2022</p>
@@ -115,6 +129,6 @@
 <!-- Core theme JS-->
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=545cc96d09786ffe845c61f5ffc02352&libraries=services,clusterer,drawing"></script>
-<script src="js/petcafe_scripts.js"></script>
+<script src="/static/js/petcafe_scripts.js"></script>
 </body>
 </html>

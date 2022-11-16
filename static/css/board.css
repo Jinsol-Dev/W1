@@ -20,9 +20,7 @@
   margin-bottom: 2em;
 }
 .input-reply {
-  width: 200px;
-  margin-left: auto;
-  margin-top: 0.5em;
+  margin-top: 1em;
   border-radius: 6px;
 }
 .reply-container {
@@ -81,4 +79,15 @@ li {
 .article-actions input:active {
   color: black;
   background-color: rgb(211, 170, 235);
+}
+
+.communityContainer {
+  width: 80%;
+  margin: 2.5rem auto 5rem auto;
+}
+
+#replyInput{
+  width: 100%;
+  height: 50px;
+  text-indent: 5px
 }

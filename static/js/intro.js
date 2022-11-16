@@ -2,6 +2,22 @@
 const adminbtn = document.getElementById('admin-btn')
 const admincontent = document.querySelector('.admin-container')
 const questform = document.querySelector('.formbox')
+const istLogedBox = document.getElementById('isLoged')
+
+$(document).ready(function () {
+  if (document.cookie === '') {
+    istLogedBox.innerHTML = `<a class="nav-link text-uppercase" href="/login"> 로그인 </a>`
+  } else {
+    const logoutbtn = document.createElement('button')
+    logoutbtn.className = 'nav-link'
+    logoutbtn.classList.add('text-uppercase')
+    logoutbtn.setAttribute('id', 'nickOut')
+    logoutbtn.innerText = '로그아웃'
+    logoutbtn.addEventListener('click', logoutHandler)
+    istLogedBox.appendChild(logoutbtn)
+    // logoutbtn.istLogedBox.innerHTML = `<button class="nav-link text-uppercase" id='nickOut'> 로그아웃 </button>`
+  }
+})
 
 adminbtn.addEventListener('click', function (e) {
   admincontent.classList.toggle('admin-container')
@@ -48,3 +64,22 @@ document.getElementById('form').addEventListener('submit', function (event) {
     },
   )
 })
+
+const logoutHandler = (event) => {
+  $.ajax({
+    type: 'POST',
+    url: '/api/logout',
+    data: {},
+    success: function (response) {
+      if (response['result'] == 'success') {
+        console.log($)
+        $.cookie('mytoken', response['token'])
+
+        window.location.href = '/'
+      } else {
+        // 로그아웃이 안되면
+        alert('로그아웃이 실패했어요.')
+      }
+    },
+  })
+}

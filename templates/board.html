@@ -31,11 +31,9 @@
     <script src="/static/js/board.js" defer></script>
   </head>
   <body>
-    <header>
+   <header>
       <h1 class="site-heading text-center text-faded d-none d-lg-block">
-        <span class="site-heading-upper text-primary mb-3">
-          For My Pet
-        </span>
+        <span class="site-heading-upper text-primary mb-3"> For My Pet </span>
         <span class="site-heading-lower">F.M.P.</span>
       </h1>
     </header>
@@ -62,22 +60,35 @@
               <a class="nav-link text-uppercase" href="/">홈</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase" href="/petcafe">
-                우리동네 애견시설
+              <a class="nav-link text-uppercase" href="/gyunggi">
+                우리 동네 애견 카페
               </a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase" href="/board">
-                자유 게시판
+              <a class="nav-link text-uppercase" href="/seoul">
+                우리 동네 동물 병원
               </a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase" href="#">로그인</a>
+              <a class="nav-link text-uppercase" href="/board"> 자유 게시판 </a>
+            </li>
+            <li class="nav-item px-lg-4" id='isLoged'>
             </li>
           </ul>
         </div>
       </div>
     </nav>
+    <div class="tempContainer">
+      <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      id="modalBtn" style="width: 9rem; margin: 2.5rem auto 0rem auto; display: flex; justify-content: center;">
+      글쓰기
+      </button>
+    </div>
+    
     <div class="communityContainer">
       <div id="communityContainer">
         <div class="accordion" id="accordionExample"></div>
@@ -86,16 +97,6 @@
       <nav aria-label="Page navigation example" class="navpage">
         <!-- Modal -->
         <!-- Button trigger modal -->
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          id="modalBtn"
-          style="float: right;"
-        >
-          입력하기
-        </button>
         <div
           class="modal fade"
           id="exampleModal"
@@ -145,7 +146,7 @@
                     ></textarea>
                     <label for="content">글 내용</label>
                   </div>
-                  <input type="submit" id="submit" value="등록" />
+                  <input type="submit" value="등록" style="margin-top: 0.5rem;"/>
                 </form>
               </div>
               <div class="modal-footer"></div>
