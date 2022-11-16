@@ -20,8 +20,6 @@ db = client.fmp
 # driver.find_element(By.ID, "search.keyword.query").send_keys('경기도 애견 카페')
 # driver.find_element(By.ID, 'search.keyword.submit').send_keys(Keys.ENTER)
 
-# time.sleep(4)
-
 # html = driver.page_source
 # soup = BeautifulSoup(html, 'html.parser')
 
