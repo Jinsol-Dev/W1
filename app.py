@@ -93,25 +93,6 @@ def board_get():
   
   return jsonify({'articles': decoded_all_article})
 
-@app.route('/petcafe')
-def petcafe():
-  return render_template('petcafe.html')
-
-@app.route("/petcafe", methods=["POST"])
-def petcafe_post():
-  
-  doc={
-  }
-  
-  db.mars.insert_one(doc)
-  return jsonify({'msg': '완료!'})
-
-@app.route("/petcafe", methods=["GET"])
-def petcafe_get():
-  all_article = list(db.article.find({},{'_id':False}))
-  return jsonify({'orders': all_article})
-  
-
   # 지현 
 @app.route('/gyunggi')
 def petcafe_Gyeonggi():
