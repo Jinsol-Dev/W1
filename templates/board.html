@@ -108,6 +108,12 @@
       </div>
     </nav>
     <div class="tempContainer">
+      <div class='welcom=board'>
+        <span id='userTrue'>{{userid}}</span>
+        {%if userid%}
+        <p>님 많은 분들과 자유롭게 의견을 나눠요.</p>
+        {% endif %}
+      </div>
       <button
         type="button"
         class="btn btn-primary"
@@ -124,7 +130,6 @@
         글쓰기
       </button>
     </div>
-
     <div class="communityContainer">
       <div id="communityContainer">
         <div class="accordion" id="accordionExample"></div>
@@ -162,6 +167,7 @@
                   class="communityBox"
                   enctype="multipart/form-data"
                 >
+                <input type='hidden' name = 'createuser' value={{userid}}>
                   <div class="form-floating mb-3">
                     <input
                       type="text"
@@ -203,7 +209,5 @@
     </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
   </body>
 </html>

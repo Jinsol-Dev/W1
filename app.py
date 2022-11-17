@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from pymongo import MongoClient
 import datetime as dt
+from bson.objectid import ObjectId
 
 import jwt
 import hashlib
@@ -62,6 +63,7 @@ def board():
 
 @app.route("/post/board", methods=["POST"])
 def board_post():
+  createuser = request.form['createuser']
   title_value = request.form["title"]
   content_value = request.form["content"]
   now = dt.datetime.now()
@@ -69,6 +71,7 @@ def board_post():
     # 유저 값 토큰에서 받아서 넣어야 함.
     'title' : title_value,
     'content' : content_value,
+    'createuser' : createuser,
     'createdAt' : now.strftime("%x %X")
   }
   
@@ -88,6 +91,12 @@ def board_post_comment(id):
   }
   
   db.comments.insert_one(doc)
+  return redirect(url_for("board"))
+
+@app.route("/del/board/<id>", methods=["POST"])
+def board_del_comment(id):
+  comment_id = ObjectId(id)
+  db.board.delete_one({'_id':comment_id})
   return redirect(url_for("board"))
 
 @app.route("/board/get", methods=["GET"])
