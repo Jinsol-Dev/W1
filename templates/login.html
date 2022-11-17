@@ -40,12 +40,12 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
+      let target = '';
 
       $(document).ready(function() {
-        {% if nickname %}
-          $('#isLoged').text(`로그아웃 / {{ nickname }}`)
-          // *** 수정 내용 : 등록한 정보 버튼 보이지 않는 처리 추가 ***
-          $('#floatingdiv').show()
+        {% if msg %}
+        alert('{{msg}}')
+        target = '{{target}}'
       {% endif %}
       });
 
@@ -79,7 +79,7 @@
                 console.log($.cookie)
                 $.cookie("mytoken", response["token"]);
 
-                window.location.href = "/";
+                window.location.href = `/${target}`;
               } else {
                 // 로그인이 안되면 에러메시지를 띄웁니다.
                 alert(response["msg"]);
