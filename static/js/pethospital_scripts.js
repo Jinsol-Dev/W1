@@ -50,3 +50,87 @@ function displayMarker(place) {
     infowindow.open(map, marker)
   })
 }
+
+function show_pethospital() {
+  $.ajax({
+    type: 'GET',
+    url: '/seoul_get',
+    data: {},
+    success: function (response) {
+      let rows = response['pethospital']
+      const bigContainer = document.getElementById('list')
+      for (let i = 0; i < rows.length; i++) {
+        let name = rows[i]['name']
+        let cafeId = rows[i]['_id']
+        let time = rows[i]['time']
+        let phone = rows[i]['phone']
+        let address = rows[i]['address']
+
+        const cafeContainer = document.createElement('tr')
+        cafeContainer.className = 'cafeList'
+        cafeContainer.setAttribute('id', cafeId)
+        cafeContainer.addEventListener('click', showModal)
+        cafeContainer.innerHTML = `
+        <th scope="row">병원</th>
+        <td>${name}</td>
+        <td>${time}</td>
+        <td>${phone}</td>
+                        <td>${address}</td>
+
+                        `
+
+        bigContainer.appendChild(cafeContainer)
+      }
+    },
+  })
+}
+
+function showModal(e) {
+  const cafeId = e.target.parentNode.id
+  $.ajax({
+    type: 'GET',
+    url: `/get/seoul/${cafeId}`,
+    data: {},
+    success: function (response) {
+      comments = response.comments
+      console.log(comments)
+      makeModal(e.target.parentNode, comments)
+    },
+  })
+
+  $('#myModal').modal('show')
+}
+const makeModal = (e, comment) => {
+  const title = e.children[1].innerText
+  const cafeId = e.id
+  const comments = [...comment]
+  if ($('#modal-header')) {
+    const modalContainer = document.getElementById('modal-header')
+    modalContainer.innerHTML = `<h5 class="modal-title">${title}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`
+
+    const modalBody = document.getElementById('modal-body')
+    modalBody.innerHTML = ''
+    if (comments.length === 0) {
+      modalBody.innerHTML = `<p>첫 후기를 남겨보세요:)</p>
+            <form action=/post/seoul/${cafeId} method="post">
+        <input type="text" name="content"/>
+        <button type="submit" class="btn btn-primary">후기 등록</button>
+      </form>
+        `
+    } else {
+      for (i of comments) {
+        modalBody.innerHTML += `
+        <p>${i.content}</p>
+        <p>${i.createdAt}</p>
+        `
+      }
+      modalBody.innerHTML += `
+      <form action=/post/seoul/${cafeId} method="post">
+        <input type="text" name="content"/>
+        <button type="submit" class="btn btn-primary">후기 등록</button>
+      </form>
+        `
+    }
+  }
+}

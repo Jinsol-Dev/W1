@@ -122,10 +122,21 @@ def petcafe_Gyeonggi_post():
 
 @app.route("/gyunggi_get", methods=["GET"])
 def petcafe_Gyeonggi_get():
-  petcafe_list = list(db.petcafe.find({}, {'_id': False}))
-  return jsonify({'petcafes': petcafe_list})
+  petcafe_list = list(db.petcafe.find({}))
+  
+  decoded_all_article = [] 
+  for document in petcafe_list :
+    document['_id'] = str(document['_id'])
+    all_comments = list(db.gyungicom.find({'comment_id' : document['_id']}, {'_id':False}))
+    document['comments'] = all_comments
+    decoded_all_article.append(document)
+  
+  return jsonify({'petcafes': decoded_all_article})
+
 
 # 펫카페 댓글 파트
+
+
 @app.route("/get/gyunggi/<id>", methods=["GET"])
 def gyunggi_get_comment(id):
   print(id)
@@ -149,6 +160,30 @@ def gyunggi_post_comment(id):
   db.gyungicom.insert_one(doc)
   return redirect(url_for("petcafe_Gyeonggi"))
 
+# 병원 댓글 파트
+@app.route("/get/seoul/<id>", methods=["GET"])
+def seoul_get_comment(id):
+  print(id)
+  cafename = id
+  all_comments = list(db.seoulcom.find({'comment_id' :cafename}, {'_id':False}))
+  return jsonify({'comments': all_comments})
+
+@app.route("/post/seoul/<id>", methods=["POST"])
+def seoul_post_comment(id):
+  print(id)
+  comment_id = id
+  content_value = request.form["content"]
+  now = dt.datetime.now()
+  doc={
+    # 유저 값 토큰에서 받아서 넣어야 함.
+    'comment_id' : comment_id,
+    'content' : content_value,
+    'createdAt' : now.strftime("%x %X")
+  }
+  
+  db.seoulcom.insert_one(doc)
+  return redirect(url_for("pethospital_Seoul"))
+
 
 
 # 진솔
@@ -170,8 +205,16 @@ def pethospital_Seoul():
 
 @app.route("/seoul_get", methods=["GET"])
 def pethospital_Seoul_get():
-    all_pethospital = list(db.pethospital.find({},{'_id':False}))
-    return jsonify({'pethospital': all_pethospital})
+  all_pethospital = list(db.pethospital.find({}))
+  
+  decoded_all_article = [] 
+  for document in all_pethospital :
+    document['_id'] = str(document['_id'])
+    all_comments = list(db.pethospital.find({'comment_id' : document['_id']}, {'_id':False}))
+    document['comments'] = all_comments
+    decoded_all_article.append(document)
+  
+  return jsonify({'pethospital': decoded_all_article})
 
 @app.route('/login')
 def login():
