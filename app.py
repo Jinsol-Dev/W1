@@ -22,7 +22,7 @@ def home():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
-        return render_template('index.html', nickname=user_info["nick"])
+        return render_template('index.html', nickname=user_info["nick"], userid=user_info["id"])
     except jwt.ExpiredSignatureError:
         # return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
         return render_template('index.html')
@@ -54,7 +54,7 @@ def board():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
-        return render_template('board.html', nickname=user_info["nick"])
+        return render_template('board.html', nickname=user_info["nick"], userid=user_info["id"])
     except jwt.ExpiredSignatureError:
         return render_template('board.html')
     except jwt.exceptions.DecodeError:
@@ -110,7 +110,7 @@ def petcafe_Gyeonggi():
       try:
           payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
           user_info = db.user.find_one({"id": payload['id']})
-          return render_template('petcafe.html', nickname=user_info["nick"])
+          return render_template('petcafe.html', nickname=user_info["nick"], userid=user_info["id"])
       except jwt.ExpiredSignatureError:
           return render_template('petcafe.html')
       except jwt.exceptions.DecodeError:
@@ -158,7 +158,7 @@ def pethospital_Seoul():
         try:
             payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
             user_info = db.user.find_one({"id": payload['id']})
-            return render_template('pethospital.html', nickname=user_info["nick"])
+            return render_template('pethospital.html', nickname=user_info["nick"], userid=user_info["id"])
         except jwt.ExpiredSignatureError:
             return render_template('pethospital.html')
         except jwt.exceptions.DecodeError:
