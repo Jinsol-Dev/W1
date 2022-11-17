@@ -50,7 +50,15 @@ def home_get():
   
 @app.route('/board')
 def board():
-  return render_template('board.html')
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        return render_template('board.html', nickname=user_info["nick"])
+    except jwt.ExpiredSignatureError:
+        return render_template('board.html')
+    except jwt.exceptions.DecodeError:
+        return render_template('board.html')
 
 @app.route("/post/board", methods=["POST"])
 def board_post():
@@ -98,7 +106,15 @@ def board_get():
   # 지현 
 @app.route('/gyunggi')
 def petcafe_Gyeonggi():
-  return render_template('petcafe.html')
+      token_receive = request.cookies.get('mytoken')
+      try:
+          payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+          user_info = db.user.find_one({"id": payload['id']})
+          return render_template('petcafe.html', nickname=user_info["nick"])
+      except jwt.ExpiredSignatureError:
+          return render_template('petcafe.html')
+      except jwt.exceptions.DecodeError:
+          return render_template('petcafe.html')
 
 @app.route("/gyunggi", methods=["POST"])
 def petcafe_Gyeonggi_post():
@@ -138,7 +154,15 @@ def gyunggi_post_comment(id):
 # 진솔
 @app.route('/seoul')
 def pethospital_Seoul():
-  return render_template('pethospital.html')
+        token_receive = request.cookies.get('mytoken')
+        try:
+            payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+            user_info = db.user.find_one({"id": payload['id']})
+            return render_template('pethospital.html', nickname=user_info["nick"])
+        except jwt.ExpiredSignatureError:
+            return render_template('pethospital.html')
+        except jwt.exceptions.DecodeError:
+            return render_template('pethospital.html')
 
 # @app.route("/seoul", methods=["POST"])
 # def pethospital_Seoul_post(): 
