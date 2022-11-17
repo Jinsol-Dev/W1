@@ -1,15 +1,17 @@
-.table {
-    width: 70%;
-    margin: auto auto 5rem auto;
-    border-radius: 4px;
-  }
-
 .box {
-    width: 70%;
+    width: 68%;
     margin: auto auto 5rem auto;
-    background-color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 4px;
   }
+.box > table {
+  color: whitesmoke;
+}
+/* 
+.hospitalList:hover {
+  background-color: whitesmoke;
+  color: black;
+} */
 
 .btn1 {
   all: unset; 
