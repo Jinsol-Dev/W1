@@ -8,8 +8,8 @@ function show_articles() {
     url: '/board/get',
     data: {},
     success: function (response) {
+      console.log(response)
       const boardArticles = [...response.articles]
-      console.log(document.getElementById('userTrue').innerText)
       const userTrue = document.getElementById('userTrue').innerText
 
       const accordion = document.getElementById('accordionExample')
@@ -22,10 +22,9 @@ function show_articles() {
         const targetId = '#collapse' + el._id
         const targetedId = 'collapse' + el._id
         const userName = el.createuser
+
         if (el.createuser) {
           if (userTrue === el.createuser) {
-            console.log(el.title)
-
             if (el.comments.length === 0) {
               Item.innerHTML = `
        <div class="accordion-item">
@@ -52,7 +51,7 @@ function show_articles() {
                   <input type="submit" value="등록" style="margin-top: 0.5rem;">
                 </form>
                 <form action="del/board/${el._id}" method="post" class="input-reply" id= "delBtn" >
-                  <input type="submit" value="게시글 삭제" style="margin-top: 0.5rem;" id='>
+  <input class="registration" type="submit" value="게시글 삭제" style="margin-top: 0.5rem;"></input>
                 </form>
               </article>
             </div>
