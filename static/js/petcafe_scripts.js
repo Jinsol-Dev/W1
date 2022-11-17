@@ -62,15 +62,18 @@ function show() {
     data: {},
     success: function (response) {
       let rows = response['petcafes']
+      console.log(rows)
       const bigContainer = document.getElementById('list')
       for (let i = 0; i < rows.length; i++) {
         let name = rows[i]['name']
+        let cafeId = rows[i]['_id']
         let time = rows[i]['time']
         let phone = rows[i]['phone']
         let category = rows[i]['category']
 
         const cafeContainer = document.createElement('tr')
         cafeContainer.className = 'cafeList'
+        cafeContainer.setAttribute('id', cafeId)
         cafeContainer.addEventListener('click', showModal)
         cafeContainer.innerHTML = `
                         <th scope="row">${category}</th>
@@ -85,11 +88,10 @@ function show() {
 }
 
 function showModal(e) {
-  const title = e.target.parentNode.children[1].innerText
-  console.log('in')
+  const cafeId = e.target.parentNode.id
   $.ajax({
     type: 'GET',
-    url: `/get/gyunggi/${title}`,
+    url: `/get/gyunggi/${cafeId}`,
     data: {},
     success: function (response) {
       comments = response.comments
@@ -102,6 +104,7 @@ function showModal(e) {
 }
 const makeModal = (e, comment) => {
   const title = e.children[1].innerText
+  const cafeId = e.id
   const comments = [...comment]
   if ($('#modal-header')) {
     const modalContainer = document.getElementById('modal-header')
@@ -112,7 +115,7 @@ const makeModal = (e, comment) => {
     modalBody.innerHTML = ''
     if (comments.length === 0) {
       modalBody.innerHTML = `<p>첫 후기를 남겨보세요:)</p>
-            <form action=/post/gyunggi/${title} method="post">
+            <form action=/post/gyunggi/${cafeId} method="post">
         <input type="text" name="content"/>
         <button type="submit" class="btn btn-primary">후기 등록</button>
       </form>
@@ -125,7 +128,7 @@ const makeModal = (e, comment) => {
         `
       }
       modalBody.innerHTML += `
-      <form action=/post/gyunggi/${title} method="post">
+      <form action=/post/gyunggi/${cafeId} method="post">
         <input type="text" name="content"/>
         <button type="submit" class="btn btn-primary">후기 등록</button>
       </form>

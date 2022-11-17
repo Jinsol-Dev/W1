@@ -63,31 +63,6 @@
         window.location.href = "./";
       }
 
-      function show_pethospital() {
-        $.ajax({
-          type: "GET",
-          url: "/seoul_get",
-          data: {},
-          success: function (response) {
-            let row = response["pethospital"];
-            for (let i = 0; i < row.length; i++) {
-              let name = row[i]["name"];
-              let time = row[i]["time"];
-              let phone = row[i]["phone"];
-              let address = row[i]["address"];
-
-              let temp_html = `<tr>
-                                <th scope="row">병원</th>
-                                    <td>${name}</td>
-                                    <td>${time}</td>
-                                    <td>${phone}</td>
-                                    <td>${address}</td>
-                              </tr>`;
-              $("#list").append(temp_html);
-            }
-          },
-        });
-      }
     </script>
   </head>
   <body>
@@ -168,6 +143,23 @@
         </thead>
         <tbody id="list"></tbody>
       </table>
+    </div>
+        <div class="modal" id="myModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" id="modal-header"></div>
+          <div class="modal-body" id="modal-body"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <footer class="footer text-faded text-center py-5">
       <div class="container">
