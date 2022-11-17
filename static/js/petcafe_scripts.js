@@ -111,7 +111,12 @@ const makeModal = (e, comment) => {
     const modalBody = document.getElementById('modal-body')
     modalBody.innerHTML = ''
     if (comments.length === 0) {
-      modalBody.innerHTML = `<p>첫 후기를 남겨보세요:)</p>`
+      modalBody.innerHTML = `<p>첫 후기를 남겨보세요:)</p>
+            <form action=/post/gyunggi/${title} method="post">
+        <input type="text" name="content"/>
+        <button type="submit" class="btn btn-primary">후기 등록</button>
+      </form>
+        `
     } else {
       for (i of comments) {
         modalBody.innerHTML += `
