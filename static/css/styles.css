@@ -11787,6 +11787,7 @@ p {
 .cta {
   padding-top: 5rem;
   padding-bottom: 5rem;
+  /* 투명으로 */
   background-color: transparent;
 }
 .cta .cta-inner {
