@@ -91,14 +91,24 @@ li {
   height: 50px;
   text-indent: 5px;
 }
+
 .accordion-body {
   background-color: rgb(4, 52, 94);
+  color: black;
 }
 
 .content-container {
   color: rgb(244, 166, 71);
 }
 
+.reply-content {
+  color: black;
+}
+
+/* 등록된 댓글이 없습니다. */
+.reply-article {
+  color: white;
+}
 #delBtn {
   display: flex;
   justify-content: flex-end;
