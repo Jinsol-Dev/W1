@@ -11787,7 +11787,7 @@ p {
 .cta {
   padding-top: 5rem;
   padding-bottom: 5rem;
-  background-color: rgba(230, 167, 86, 0.9);
+  background-color: transparent;
 }
 .cta .cta-inner {
   position: relative;
