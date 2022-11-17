@@ -177,3 +177,22 @@ input[type='cancel'] {
 }
 .questadmin {
 }
+
+.stop-footer {
+  min-width : 100vh
+}
+
+.sa {
+  opacity: 0;
+  transition: all .5s ease;
+}
+
+.sa.show {
+  opacity: 1;
+  transform: none;
+}
+
+.picture {
+  width: 20rem;
+  border-radius: 100%;
+}

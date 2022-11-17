@@ -51,8 +51,8 @@ function show_articles() {
                   <input type="text" id="replyInput" name='content' placeholder="댓글을 입력해주세요."/>
                   <input type="submit" value="등록" style="margin-top: 0.5rem;">
                 </form>
-                <form action="del/board/${el._id}" method="post" class="input-reply">
-                  <input type="submit" value="삭제" style="margin-top: 0.5rem;">
+                <form action="del/board/${el._id}" method="post" class="input-reply" id= "delBtn" >
+                  <input type="submit" value="게시글 삭제" style="margin-top: 0.5rem;" id='>
                 </form>
               </article>
             </div>
@@ -91,7 +91,6 @@ function show_articles() {
               const firstArticle = document.createElement('article')
               firstArticle.className = 'reply-article'
 
-              // const dateNow = new Date(el.comments.createdAt).toLocaleString()
               const commentsList = [...el.comments]
               commentsList.map((ele) => {
                 const replyContent = document.createElement('div')
@@ -116,8 +115,9 @@ function show_articles() {
               formDiv1.className = 'input-reply'
               formDiv1.setAttribute('action', `/del/board/${el._id}`)
               formDiv1.setAttribute('method', 'post')
+              formDiv1.setAttribute('id', 'delBtn')
               formDiv1.innerHTML = `
-          <input class="registration" type="submit" value="삭제" style="margin-top: 0.5rem;"></input>
+          <input id= "delBtn" class="registration" type="submit" value="게시글 삭제" style="margin-top: 0.5rem;"></input>
           `
               firstArticle.appendChild(formDiv1)
 
@@ -192,7 +192,6 @@ function show_articles() {
             const firstArticle = document.createElement('article')
             firstArticle.className = 'reply-article'
 
-            // const dateNow = new Date(el.comments.createdAt).toLocaleString()
             const commentsList = [...el.comments]
             commentsList.map((ele) => {
               const replyContent = document.createElement('div')

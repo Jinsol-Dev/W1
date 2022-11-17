@@ -86,10 +86,10 @@ li {
   margin: 2.5rem auto 5rem auto;
 }
 
-#replyInput{
+#replyInput {
   width: 100%;
   height: 50px;
-  text-indent: 5px
+  text-indent: 5px;
 }
 
 .accordion-body {
@@ -108,6 +108,10 @@ li {
 /* 등록된 댓글이 없습니다. */
 .reply-article {
   color: white;
+}
+#delBtn {
+  display: flex;
+  justify-content: flex-end;
 }
 
 #greeting {

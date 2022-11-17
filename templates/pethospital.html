@@ -24,6 +24,13 @@
       href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!--ajax와 부트스트랩  스크립 추가 -->
     <link href="/static/css/hospital_styles.css" rel="stylesheet" />
     <link href="/static/css/styles.css" rel="stylesheet" />
@@ -42,13 +49,12 @@
 
     <!--ajax요청 코드 추가-->
     <script>
-      $(document).ready(function () {
+      $(document).ready(function() {
         {% if nickname %}
-          $('#isLoged').text(`로그아웃 / {{ nickname }}`)
+          $('#isLoged').text(`로그아웃`)
           // *** 수정 내용 : 등록한 정보 버튼 보이지 않는 처리 추가 ***
-          $('#floatingdiv').show()
+          $('#profile').show()
       {% endif %}
-        show_pethospital();
       });
 
       function isLoged() {
@@ -62,7 +68,6 @@
         $.removeCookie("mytoken");
         window.location.href = "./";
       }
-
     </script>
   </head>
   <body>
@@ -116,6 +121,11 @@
                 >로그인</a
               >
             </li>
+            <li class="nav-item px-lg-4" id="profile" style="display: none">
+              <span class="nav-link text-uppercase"
+                ><i class="fa-solid fa-user"></i> {{nickname}}</span
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -144,7 +154,7 @@
         <tbody id="list"></tbody>
       </table>
     </div>
-        <div class="modal" id="myModal" tabindex="-1">
+    <div class="modal" id="myModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" id="modal-header"></div>
