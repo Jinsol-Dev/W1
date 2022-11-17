@@ -12,3 +12,8 @@
   color: black;
 
 }
+
+#map {
+  border:2px outset rgba(17, 56, 86, 0.67);
+  border-radius:5px;
+}
