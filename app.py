@@ -60,20 +60,22 @@ def board():
     except jwt.exceptions.DecodeError:
         return render_template('board.html')
 
-@app.route("/board", methods=["POST"])
+@app.route("/post/board", methods=["POST"])
 def board_post():
   title_value = request.form["title"]
   content_value = request.form["content"]
+  now = dt.datetime.now()
   doc={
     # 유저 값 토큰에서 받아서 넣어야 함.
     'title' : title_value,
-    'content' : content_value
+    'content' : content_value,
+    'createdAt' : now.strftime("%x %X")
   }
   
   db.board.insert_one(doc)
-  return render_template('board.html')
+  return redirect(url_for("board"))
 
-@app.route("/board/<id>", methods=["POST"])
+@app.route("/post/board/<id>", methods=["POST"])
 def board_post_comment(id):
   comment_id = id
   content_value = request.form["content"]
@@ -86,7 +88,7 @@ def board_post_comment(id):
   }
   
   db.comments.insert_one(doc)
-  return render_template('board.html')
+  return redirect(url_for("board"))
 
 @app.route("/board/get", methods=["GET"])
 def board_get():
@@ -122,6 +124,31 @@ def petcafe_Gyeonggi_post():
 def petcafe_Gyeonggi_get():
   petcafe_list = list(db.petcafe.find({}, {'_id': False}))
   return jsonify({'petcafes': petcafe_list})
+
+# 펫카페 댓글 파트
+@app.route("/get/gyunggi/<id>", methods=["GET"])
+def gyunggi_get_comment(id):
+  print(id)
+  cafename = id
+  all_comments = list(db.gyungicom.find({'comment_id' :cafename}, {'_id':False}))
+  return jsonify({'comments': all_comments})
+
+@app.route("/post/gyunggi/<id>", methods=["POST"])
+def gyunggi_post_comment(id):
+  print(id)
+  comment_id = id
+  content_value = request.form["content"]
+  now = dt.datetime.now()
+  doc={
+    # 유저 값 토큰에서 받아서 넣어야 함.
+    'comment_id' : comment_id,
+    'content' : content_value,
+    'createdAt' : now.strftime("%x %X")
+  }
+  
+  db.gyungicom.insert_one(doc)
+  return redirect(url_for("petcafe_Gyeonggi"))
+
 
 
 # 진솔

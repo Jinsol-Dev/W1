@@ -1,26 +1,8 @@
-/*!
- * Start Bootstrap - Business Casual v7.0.8 (https://startbootstrap.com/theme/business-casual)
- * Copyright 2013-2022 Start Bootstrap
- * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-business-casual/blob/master/LICENSE)
- */
-  // Highlights current date on contact page
-  // window.addEventListener('DOMContentLoaded', (event) => {
-  // const listHoursArray = document.body.querySelectorAll('.list-hours li')
-  // listHoursArray[new Date().getDay()].classList.add('today')
-  // })
-// var container = document.getElementById('map')
-// var options = {
-//   center: new kakao.maps.LatLng(33.450701, 126.570667),
-//   level: 3,
-// }
-
-// var map = new kakao.maps.Map(container, options)
-
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-    mapOption = {
+  mapOption = {
     center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
     level: 3, // 지도의 확대 레벨
   }
@@ -68,5 +50,3 @@ function displayMarker(place) {
     infowindow.open(map, marker)
   })
 }
-
-  

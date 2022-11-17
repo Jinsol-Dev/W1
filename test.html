@@ -20,6 +20,9 @@
     <!-- ${el.title} -->
     <!-- </h2> -->
 
+    <form action="/post/cafe/${title}" method="post">
+      <button type="button" class="btn btn-primary">후기 등록</button>
+    </form>
     <div
       id="targetedId"
       class="accordion-collapse collapse"
@@ -36,43 +39,5 @@
       </div>
     </div>
     <!-- </div> -->
-    <script>
-      const firstDiv = document.createElement('div')
-      firstDiv.className = 'accordion-item'
-      const firsth2 = document.createElement('h2')
-      firsth2.className = 'accordion-header'
-      firsth2.setAttribute('id', 'headingTwo')
-      const firstbtn = document.createElement('button')
-      firstbtn.className = 'ccordion-button'
-      firstbtn.classList.add('collapsed')
-      firstbtn.setAttribute('type', 'button')
-      firstbtn.setAttribute('data-bs-toggle', 'collapse')
-      firstbtn.setAttribute('data-bs-target', 'targetId')
-      firstbtn.setAttribute('aria-expanded', 'false')
-      firstbtn.setAttribute('aria-controls', 'collapseTwo')
-      firsth2.appendChild(firstbtn)
-
-      const secondDiv = document.createElement('div')
-      secondDiv.className = 'accordion-collapse'
-      secondDiv.classList.add('collapse')
-      secondDiv.setAttribute('id', 'targetedId')
-      secondDiv.setAttribute('aria-labelledby', 'headingTwo')
-      secondDiv.setAttribute('data-bs-parent', '#accordionExample')
-
-      const thirdDiv = document.createElement('div')
-      thirdDiv.className = 'accordion-body'
-      const fourthDiv = document.createElement('div')
-      fourthDiv.className = 'content-container'
-      const firstArticle = document.createElement('article')
-      firstArticle.className = 'reply-article'
-      thirdDiv.appendChild(fourthDiv)
-      thirdDiv.appendChild(firstArticle)
-      secondDiv.appendChild(thirdDiv)
-      firstDiv.appendChild(firsth2)
-      firstDiv.appendChild(secondDiv)
-
-      const box = document.body
-      box.append(firstDiv)
-    </script>
   </body>
 </html>
