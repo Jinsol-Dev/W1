@@ -1,16 +1,3 @@
-/*!
- * Start Bootstrap - Business Casual v7.0.8 (https://startbootstrap.com/theme/business-casual)
- * Copyright 2013-2022 Start Bootstrap
- * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-business-casual/blob/master/LICENSE)
- */
-// Highlights current date on contact page
-window.addEventListener('DOMContentLoaded', (event) => {
-  //삭제해도 되는 부분
-  const listHoursArray = document.body.querySelectorAll('.list-hours li')
-  console.log(listHoursArray)
-  listHoursArray[new Date().getDay()].classList.add('today')
-})
-
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
 
@@ -106,6 +93,7 @@ function showModal(e) {
     data: {},
     success: function (response) {
       comments = response.comments
+      console.log(comments)
       makeModal(e.target.parentNode, comments)
     },
   })
@@ -131,6 +119,12 @@ const makeModal = (e, comment) => {
         <p>${i.createdAt}</p>
         `
       }
+      modalBody.innerHTML += `
+      <form action=/post/gyunggi/${title} method="post">
+        <input type="text" name="content"/>
+        <button type="submit" class="btn btn-primary">후기 등록</button>
+      </form>
+        `
     }
   }
 }
