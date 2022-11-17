@@ -93,6 +93,9 @@ li {
 }
 .accordion-body {
   background-color: rgb(4, 52, 94);
+}
+
+.content-container {
   color: rgb(244, 166, 71);
 }
 
