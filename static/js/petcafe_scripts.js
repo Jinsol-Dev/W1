@@ -1,14 +1,3 @@
-/*!
- * Start Bootstrap - Business Casual v7.0.8 (https://startbootstrap.com/theme/business-casual)
- * Copyright 2013-2022 Start Bootstrap
- * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-business-casual/blob/master/LICENSE)
- */
-// Highlights current date on contact page
-window.addEventListener('DOMContentLoaded', (event) => {
-  const listHoursArray = document.body.querySelectorAll('.list-hours li')
-  listHoursArray[new Date().getDay()].classList.add('today')
-})
-
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
 
@@ -62,40 +51,80 @@ function displayMarker(place) {
   })
 }
 
-
-
 $(document).ready(function () {
   show()
 })
 
 function show() {
   $.ajax({
-      type: "GET",
-      url: '/gyunggi_get',
-      data: {},
-      success: function (response) {
-          let rows = response['petcafes']
-          for (let i = 0; i < rows.length; i++) {
-              let name = rows[i]['name']
-              let time = rows[i]['time']
-              let phone = rows[i]['phone']
-              let category = rows[i]['category']
+    type: 'GET',
+    url: '/gyunggi_get',
+    data: {},
+    success: function (response) {
+      let rows = response['petcafes']
+      const bigContainer = document.getElementById('list')
+      for (let i = 0; i < rows.length; i++) {
+        let name = rows[i]['name']
+        let time = rows[i]['time']
+        let phone = rows[i]['phone']
+        let category = rows[i]['category']
 
-              let temp_html = `<tr class="cafeList" onclick="showModal()">
+        const cafeContainer = document.createElement('tr')
+        cafeContainer.className = 'cafeList'
+        cafeContainer.addEventListener('click', showModal)
+        cafeContainer.innerHTML = `
                         <th scope="row">${category}</th>
                         <td>${name}</td>
                         <td>${time}</td>
-                        <td>${phone}</td>
-                      </tr>`
-              $('#list').append(temp_html)
-          }
+                        <td>${phone}</td>`
+
+        bigContainer.appendChild(cafeContainer)
       }
+    },
   })
 }
 
+function showModal(e) {
+  const title = e.target.parentNode.children[1].innerText
+  console.log('in')
+  $.ajax({
+    type: 'GET',
+    url: `/get/gyunggi/${title}`,
+    data: {},
+    success: function (response) {
+      comments = response.comments
+      console.log(comments)
+      makeModal(e.target.parentNode, comments)
+    },
+  })
 
+  $('#myModal').modal('show')
+}
+const makeModal = (e, comment) => {
+  const title = e.children[1].innerText
+  const comments = [...comment]
+  if ($('#modal-header')) {
+    const modalContainer = document.getElementById('modal-header')
+    modalContainer.innerHTML = `<h5 class="modal-title">${title}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`
 
-
-function showModal(){
-  $("#myModal").modal("show");
+    const modalBody = document.getElementById('modal-body')
+    modalBody.innerHTML = ''
+    if (comments.length === 0) {
+      modalBody.innerHTML = `<p>첫 후기를 남겨보세요:)</p>`
+    } else {
+      for (i of comments) {
+        modalBody.innerHTML += `
+        <p>${i.content}</p>
+        <p>${i.createdAt}</p>
+        `
+      }
+      modalBody.innerHTML += `
+      <form action=/post/gyunggi/${title} method="post">
+        <input type="text" name="content"/>
+        <button type="submit" class="btn btn-primary">후기 등록</button>
+      </form>
+        `
+    }
+  }
 }

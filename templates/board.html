@@ -28,10 +28,32 @@
     <link href="/static/css/styles.css" rel="stylesheet" />
     <link href="/static/css/board.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="/static/js/board.js" defer></script>
+    <script>
+            $(document).ready(function() {
+        {% if nickname %}
+          $('#isLoged').text(`로그아웃 / {{ nickname }}`)
+          // *** 수정 내용 : 등록한 정보 버튼 보이지 않는 처리 추가 ***
+          $('#floatingdiv').show()
+      {% endif %}
+      });
+
+      function isLoged() {
+        if ($("#isLoged").text() == "로그인") {
+          window.location.href = "./login";
+        } else {
+          logout();
+        }
+      }
+      function logout() {
+        $.removeCookie("mytoken");
+        window.location.href = "./";
+      }
+    </script>
   </head>
   <body>
-   <header>
+    <header>
       <h1 class="site-heading text-center text-faded d-none d-lg-block">
         <span class="site-heading-upper text-primary mb-3"> For My Pet </span>
         <span class="site-heading-lower">F.M.P.</span>
@@ -72,7 +94,14 @@
             <li class="nav-item px-lg-4">
               <a class="nav-link text-uppercase" href="/board"> 자유 게시판 </a>
             </li>
-            <li class="nav-item px-lg-4" id='isLoged'>
+            <li class="nav-item px-lg-4">
+              <a
+                class="nav-link text-uppercase"
+                onclick="isLoged()"
+                id="isLoged"
+                href="#"
+                >로그인</a
+              >
             </li>
           </ul>
         </div>
@@ -80,15 +109,22 @@
     </nav>
     <div class="tempContainer">
       <button
-      type="button"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-      id="modalBtn" style="width: 9rem; margin: 2.5rem auto 0rem auto; display: flex; justify-content: center;">
-      글쓰기
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        id="modalBtn"
+        style="
+          width: 9rem;
+          margin: 2.5rem auto 0rem auto;
+          display: flex;
+          justify-content: center;
+        "
+      >
+        글쓰기
       </button>
     </div>
-    
+
     <div class="communityContainer">
       <div id="communityContainer">
         <div class="accordion" id="accordionExample"></div>
@@ -121,7 +157,7 @@
               </div>
               <div class="modal-body">
                 <form
-                  action="/board"
+                  action="/post/board"
                   method="post"
                   class="communityBox"
                   enctype="multipart/form-data"
@@ -141,12 +177,16 @@
                       class="form-control"
                       id="content"
                       name="content"
-                      style="height: 100px;"
+                      style="height: 100px"
                       required
                     ></textarea>
                     <label for="content">글 내용</label>
                   </div>
-                  <input type="submit" value="등록" style="margin-top: 0.5rem;"/>
+                  <input
+                    type="submit"
+                    value="등록"
+                    style="margin-top: 0.5rem"
+                  />
                 </form>
               </div>
               <div class="modal-footer"></div>
