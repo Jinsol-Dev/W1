@@ -178,25 +178,21 @@ input[type='cancel'] {
 .questadmin {
 }
 
-.form {
-  display: flex;
-  flex-wrap: wrap;
+.stop-footer {
+  min-width : 100vh
 }
 
-.home-form{
-  padding-left: 15rem;
-  padding-right: 15rem;
+.sa {
+  opacity: 0;
+  transition: all .5s ease;
 }
 
-.home-img-box{
-  
+.sa.show {
+  opacity: 1;
+  transform: none;
 }
 
-.home-img {
-  width: 20vw;
+.picture {
+  width: 20rem;
   border-radius: 100%;
-}
-
-.home-text {
-  width: 30%;
 }
