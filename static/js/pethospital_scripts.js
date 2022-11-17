@@ -121,9 +121,10 @@ const makeModal = (e, comment) => {
     } else {
       for (i of comments) {
         modalBody.innerHTML += `
+        <div class="content">
         <p>${i.content}</p>
-        <p>${i.createdAt}</p>
-        `
+        <p class="aa">${i.createdAt}</p>
+        </div>`
       }
       modalBody.innerHTML += `
       <form action=/post/seoul/${cafeId} method="post">
@@ -134,3 +135,9 @@ const makeModal = (e, comment) => {
     }
   }
 }
+
+const aaa = document.getElementById('surprise')
+aaa.addEventListener('click',surprise)
+const surprise = ()=>{
+  window.location.href='/surprise'
+  } 
