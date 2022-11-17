@@ -57,6 +57,7 @@ function show_pethospital() {
     url: '/seoul_get',
     data: {},
     success: function (response) {
+      console.log(response)
       let rows = response['pethospital']
       const bigContainer = document.getElementById('list')
       for (let i = 0; i < rows.length; i++) {

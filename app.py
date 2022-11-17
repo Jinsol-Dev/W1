@@ -57,7 +57,7 @@ def board():
         user_info = db.user.find_one({"id": payload['id']})
         return render_template('board.html', nickname=user_info["nick"], userid=user_info["id"])
     except jwt.ExpiredSignatureError:
-        return render_template('login.html', msg="로그인 유지 시간이 만료되어, 재 로그인이 필요합니다.", target="board")
+        return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="board")
     except jwt.exceptions.DecodeError:
         return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="board")
 
@@ -121,7 +121,7 @@ def petcafe_Gyeonggi():
         user_info = db.user.find_one({"id": payload['id']})
         return render_template('petcafe.html', nickname=user_info["nick"], userid=user_info["id"])
     except jwt.ExpiredSignatureError:
-        return render_template('login.html', msg="로그인 유지 시간이 만료되어, 재 로그인이 필요합니다.", target="gyunggi")
+        return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="gyunggi")
     except jwt.exceptions.DecodeError:
         return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="gyunggi")
 
@@ -204,7 +204,7 @@ def pethospital_Seoul():
         user_info = db.user.find_one({"id": payload['id']})
         return render_template('pethospital.html', nickname=user_info["nick"], userid=user_info["id"])
     except jwt.ExpiredSignatureError:
-        return render_template('login.html', msg="로그인 유지 시간이 만료되어, 재 로그인이 필요합니다.", target="seoul")
+        return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="seoul")
     except jwt.exceptions.DecodeError:
         return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="seoul")
 
