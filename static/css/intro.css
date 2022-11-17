@@ -175,16 +175,17 @@ input[type='cancel'] {
 .btn-container-mail input {
   text-align: center;
 }
-.questadmin {
+.mainbgBox {
+  margin-bottom: 10px;
 }
 
 .stop-footer {
-  min-width : 100vh
+  min-width: 100vh;
 }
 
 .sa {
   opacity: 0;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .sa.show {
@@ -195,4 +196,19 @@ input[type='cancel'] {
 .picture {
   width: 20rem;
   border-radius: 100%;
+}
+
+.canvas {
+  height: 50px;
+  width: 50px;
+  margin: 50px 50px;
+  box-shadow: 50px 100px #83baff, 50px 150px #afda89, 50px 200px #ffb93a,
+    50px 250px #ff4111, 50px 300px #3a80ff, 100px 150px orange,
+    100px 200px #83baff, 100px 250px #afda89, 100px 300px #ffb93a,
+    150px 150px #6aca30, 150px 200px #ff4111, 150px 250px #59cfff,
+    200px 0px #93e3f7, 200px 50px #afda89, 200px 100px #ff4111,
+    200px 150px #83baff, 200px 200px #ffb93a, 200px 250px #6aca30,
+    200px 300px orange, 250px 50px #ffb93a, 250px 100px #3a80ff,
+    250px 150px #afda89, 250px 200px #59cfff, 250px 250px #ff4111,
+    250px 300px #93e3f7, 300px 50px #ff4111, 300px 100px orange;
 }
