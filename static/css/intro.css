@@ -177,3 +177,26 @@ input[type='cancel'] {
 }
 .questadmin {
 }
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.home-form{
+  padding-left: 15rem;
+  padding-right: 15rem;
+}
+
+.home-img-box{
+  
+}
+
+.home-img {
+  width: 20vw;
+  border-radius: 100%;
+}
+
+.home-text {
+  width: 30%;
+}
