@@ -5,7 +5,9 @@
  */
 // Highlights current date on contact page
 window.addEventListener('DOMContentLoaded', (event) => {
+  //삭제해도 되는 부분
   const listHoursArray = document.body.querySelectorAll('.list-hours li')
+  console.log(listHoursArray)
   listHoursArray[new Date().getDay()].classList.add('today')
 })
 
@@ -62,40 +64,73 @@ function displayMarker(place) {
   })
 }
 
-
-
 $(document).ready(function () {
   show()
 })
 
 function show() {
   $.ajax({
-      type: "GET",
-      url: '/gyunggi_get',
-      data: {},
-      success: function (response) {
-          let rows = response['petcafes']
-          for (let i = 0; i < rows.length; i++) {
-              let name = rows[i]['name']
-              let time = rows[i]['time']
-              let phone = rows[i]['phone']
-              let category = rows[i]['category']
+    type: 'GET',
+    url: '/gyunggi_get',
+    data: {},
+    success: function (response) {
+      let rows = response['petcafes']
+      const bigContainer = document.getElementById('list')
+      for (let i = 0; i < rows.length; i++) {
+        let name = rows[i]['name']
+        let time = rows[i]['time']
+        let phone = rows[i]['phone']
+        let category = rows[i]['category']
 
-              let temp_html = `<tr class="cafeList" onclick="showModal()">
+        const cafeContainer = document.createElement('tr')
+        cafeContainer.className = 'cafeList'
+        cafeContainer.addEventListener('click', showModal)
+        cafeContainer.innerHTML = `
                         <th scope="row">${category}</th>
                         <td>${name}</td>
                         <td>${time}</td>
-                        <td>${phone}</td>
-                      </tr>`
-              $('#list').append(temp_html)
-          }
+                        <td>${phone}</td>`
+
+        bigContainer.appendChild(cafeContainer)
       }
+    },
   })
 }
 
+function showModal(e) {
+  const title = e.target.parentNode.children[1].innerText
+  console.log('in')
+  $.ajax({
+    type: 'GET',
+    url: `/get/gyunggi/${title}`,
+    data: {},
+    success: function (response) {
+      comments = response.comments
+      makeModal(e.target.parentNode, comments)
+    },
+  })
 
+  $('#myModal').modal('show')
+}
+const makeModal = (e, comment) => {
+  const title = e.children[1].innerText
+  const comments = [...comment]
+  if ($('#modal-header')) {
+    const modalContainer = document.getElementById('modal-header')
+    modalContainer.innerHTML = `<h5 class="modal-title">${title}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`
 
-
-function showModal(){
-  $("#myModal").modal("show");
+    const modalBody = document.getElementById('modal-body')
+    modalBody.innerHTML = ''
+    if (comments.length === 0) {
+      modalBody.innerHTML = `<p>첫 후기를 남겨보세요:)</p>`
+    } else {
+      for (i of comments) {
+        modalBody.innerHTML += `
+        <p>${i.content}</p>
+        <p>${i.createdAt}</p>
+        `
+      }
+    }
+  }
 }
