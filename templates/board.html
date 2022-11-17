@@ -31,11 +31,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="/static/js/board.js" defer></script>
     <script>
-            $(document).ready(function() {
+      $(document).ready(function() {
         {% if nickname %}
-          $('#isLoged').text(`로그아웃 / {{ nickname }}`)
+          $('#isLoged').text(`로그아웃`)
           // *** 수정 내용 : 등록한 정보 버튼 보이지 않는 처리 추가 ***
-          $('#floatingdiv').show()
+          $('.floatingdiv').show()
       {% endif %}
       });
 
@@ -108,8 +108,8 @@
       </div>
     </nav>
     <div class="tempContainer">
-      <div class='welcom=board'>
-        <span id='userTrue'>{{userid}}</span>
+      <div class="welcom=board">
+        <span id="userTrue">{{userid}}</span>
         {%if userid%}
         <p>님 많은 분들과 자유롭게 의견을 나눠요.</p>
         {% endif %}
@@ -167,7 +167,7 @@
                   class="communityBox"
                   enctype="multipart/form-data"
                 >
-                <input type='hidden' name = 'createuser' value={{userid}}>
+                  <input type="hidden" name="createuser" value="{{userid}}" />
                   <div class="form-floating mb-3">
                     <input
                       type="text"
@@ -201,6 +201,15 @@
         </div>
         <ul class="pagination" id="page-container"></ul>
       </nav>
+    </div>
+    <div class="floatingdiv" style="display: none; width: 150px">
+      <!-- 등록한 정보가 없다면 없다. 있다면 있다. -->
+      <div style="text-align: center; margin-top: 5px; margin-bottom: 5px">
+        <span>
+          {{nickname}}
+          <button type="button" class="btn btn-dark">▼</button>
+        </span>
+      </div>
     </div>
     <footer class="footer text-faded text-center py-5">
       <div class="container">
