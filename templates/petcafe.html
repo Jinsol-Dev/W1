@@ -40,11 +40,11 @@
       crossorigin="anonymous"
     ></script>
     <script>
-            $(document).ready(function() {
+      $(document).ready(function() {
         {% if nickname %}
-          $('#isLoged').text(`로그아웃 / {{ nickname }}`)
+          $('#isLoged').text(`로그아웃`)
           // *** 수정 내용 : 등록한 정보 버튼 보이지 않는 처리 추가 ***
-          $('#floatingdiv').show()
+          $('.floatingdiv').show()
       {% endif %}
       });
 
@@ -117,39 +117,50 @@
       </div>
     </nav>
 
-<section class="page-section about-heading">
-    <div class="container">
-        <div id="map" style="width:100%;height:600px;">
-        <!--지도 위치-->
+    <section class="page-section about-heading">
+      <div class="container">
+        <div id="map" style="width: 100%; height: 600px">
+          <!--지도 위치-->
         </div>
-    </div>
-</section>
-  <table class="table">
-    <thead>
-    <tr>
-        <th scope="col">분류</th>
-        <th scope="col">이름</th>
-        <th scope="col">영업시간</th>
-        <th scope="col">전화번호</th>
-    </tr>
-    </thead>
-    <tbody id="list">
-    </tbody>
-  </table>
-  <div class="modal" id="myModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header" id="modal-header">
-        </div>
-        <div class="modal-body" id="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-
+      </div>
+    </section>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">분류</th>
+          <th scope="col">이름</th>
+          <th scope="col">영업시간</th>
+          <th scope="col">전화번호</th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
+    <div class="modal" id="myModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" id="modal-header"></div>
+          <div class="modal-body" id="modal-body"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              닫기
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="floatingdiv" style="display: none; width: 150px">
+      <!-- 등록한 정보가 없다면 없다. 있다면 있다. -->
+      <div style="text-align: center; margin-top: 5px; margin-bottom: 5px">
+        <span>
+          {{nickname}}
+          <button type="button" class="btn btn-dark">▼</button>
+        </span>
+      </div>
+    </div>
     <footer class="footer text-faded text-center py-5">
       <div class="container">
         <p class="m-0 small">Copyright &copy; Your Website 2022</p>
