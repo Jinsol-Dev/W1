@@ -42,13 +42,12 @@
 
     <!--ajax요청 코드 추가-->
     <script>
-      $(document).ready(function () {
+      $(document).ready(function() {
         {% if nickname %}
-          $('#isLoged').text(`로그아웃 / {{ nickname }}`)
+          $('#isLoged').text(`로그아웃`)
           // *** 수정 내용 : 등록한 정보 버튼 보이지 않는 처리 추가 ***
-          $('#floatingdiv').show()
+          $('.floatingdiv').show()
       {% endif %}
-        show_pethospital();
       });
 
       function isLoged() {
@@ -62,7 +61,6 @@
         $.removeCookie("mytoken");
         window.location.href = "./";
       }
-
     </script>
   </head>
   <body>
@@ -144,7 +142,7 @@
         <tbody id="list"></tbody>
       </table>
     </div>
-        <div class="modal" id="myModal" tabindex="-1">
+    <div class="modal" id="myModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" id="modal-header"></div>
@@ -159,6 +157,15 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="floatingdiv" style="display: none; width: 150px">
+      <!-- 등록한 정보가 없다면 없다. 있다면 있다. -->
+      <div style="text-align: center; margin-top: 5px; margin-bottom: 5px">
+        <span>
+          {{nickname}}
+          <button type="button" class="btn btn-dark">▼</button>
+        </span>
       </div>
     </div>
     <footer class="footer text-faded text-center py-5">
