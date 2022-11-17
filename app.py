@@ -57,9 +57,9 @@ def board():
         user_info = db.user.find_one({"id": payload['id']})
         return render_template('board.html', nickname=user_info["nick"], userid=user_info["id"])
     except jwt.ExpiredSignatureError:
-        return render_template('board.html')
+        return render_template('login.html', msg="로그인 유지 시간이 만료되어, 재 로그인이 필요합니다.", target="board")
     except jwt.exceptions.DecodeError:
-        return render_template('board.html')
+        return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="board")
 
 @app.route("/post/board", methods=["POST"])
 def board_post():
@@ -115,15 +115,15 @@ def board_get():
   # 지현 
 @app.route('/gyunggi')
 def petcafe_Gyeonggi():
-      token_receive = request.cookies.get('mytoken')
-      try:
-          payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-          user_info = db.user.find_one({"id": payload['id']})
-          return render_template('petcafe.html', nickname=user_info["nick"], userid=user_info["id"])
-      except jwt.ExpiredSignatureError:
-          return render_template('petcafe.html')
-      except jwt.exceptions.DecodeError:
-          return render_template('petcafe.html')
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        return render_template('petcafe.html', nickname=user_info["nick"], userid=user_info["id"])
+    except jwt.ExpiredSignatureError:
+        return render_template('login.html', msg="로그인 유지 시간이 만료되어, 재 로그인이 필요합니다.", target="gyunggi")
+    except jwt.exceptions.DecodeError:
+        return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="gyunggi")
 
 @app.route("/gyunggi", methods=["POST"])
 def petcafe_Gyeonggi_post():
@@ -198,15 +198,15 @@ def seoul_post_comment(id):
 # 진솔
 @app.route('/seoul')
 def pethospital_Seoul():
-        token_receive = request.cookies.get('mytoken')
-        try:
-            payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-            user_info = db.user.find_one({"id": payload['id']})
-            return render_template('pethospital.html', nickname=user_info["nick"], userid=user_info["id"])
-        except jwt.ExpiredSignatureError:
-            return render_template('pethospital.html')
-        except jwt.exceptions.DecodeError:
-            return render_template('pethospital.html')
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        return render_template('pethospital.html', nickname=user_info["nick"], userid=user_info["id"])
+    except jwt.ExpiredSignatureError:
+        return render_template('login.html', msg="로그인 유지 시간이 만료되어, 재 로그인이 필요합니다.", target="seoul")
+    except jwt.exceptions.DecodeError:
+        return render_template('login.html', msg="로그인 후 이용 가능합니다.", target="seoul")
 
 # @app.route("/seoul", methods=["POST"])
 # def pethospital_Seoul_post(): 
