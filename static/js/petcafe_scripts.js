@@ -123,8 +123,10 @@ const makeModal = (e, comment) => {
     } else {
       for (i of comments) {
         modalBody.innerHTML += `
+                <div class="content">
         <p>${i.content}</p>
         <p>${i.createdAt}</p>
+        </div>
         `
       }
       modalBody.innerHTML += `
